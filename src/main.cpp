@@ -250,7 +250,7 @@ int main(int argc, char *argv[])
   {
     modMan->changeSessionFile(defaultSessionFile);
     mmController->initOnce();
-    tcpSystem->startServer(12000);
+    tcpSystem->startServer(12000, false);
   }
   QObject::connect(modMan, &ZeraModules::ModuleManager::sigModulesLoaded, mmController, &ModuleManagerController::initializeEntity);
   QObject::connect(mmController, &ModuleManagerController::sigChangeSession, modMan, &ZeraModules::ModuleManager::changeSessionFile);
