@@ -29,15 +29,15 @@ find_package(VfStorageHash REQUIRED)
 find_package(VfTcp REQUIRED)
 find_package(VfNet2 REQUIRED)
 find_package(VfHelpers REQUIRED)
-#find_package(VfQml REQUIRED)
-find_package(VfScript REQUIRED)
 find_package(VfLogger REQUIRED)
-find_package(VfCryptoBridge REQUIRED)
 find_package(VfExport REQUIRED)
 find_package(VfFiles REQUIRED)
 find_Package(MeasurementModuleInterface REQUIRED)
 find_Package(zeraproxy REQUIRED)
 find_Package(VfCpp REQUIRED)
+find_package(VfVeinmanager REQUIRED)
+find_package(VfSession REQUIRED)
+find_package(VfCustomerdata REQUIRED)
 
 option(MM_NO_CONFIG_INSTALL "Do not install configuration/session files - for debugging on PC" OFF)
 
@@ -67,32 +67,14 @@ endforeach()
 
 
 #sum up project Files 
-set(SOURCES
-${PROJECT_SOURCE_DIR}/src/main.cpp
-${PROJECT_SOURCE_DIR}/src/modulemanager.cpp
-${PROJECT_SOURCE_DIR}/src/jsonsessionloader.cpp
-${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.cpp
-${PROJECT_SOURCE_DIR}/src/moduleeventhandler.cpp
-${PROJECT_SOURCE_DIR}/src/customerdatasystem.cpp
-${PROJECT_SOURCE_DIR}/src/priorityarbitrationsystem.cpp
-${PROJECT_SOURCE_DIR}/src/zeradblogger.cpp
-${PROJECT_SOURCE_DIR}/src/licensesystem.cpp
-${PROJECT_SOURCE_DIR}/src/diriteratorworker.cpp
+file(GLOB HEADER
+${PROJECT_SOURCE_DIR}/src/*.h
     )
 
 
-set(HEADER
-${PROJECT_SOURCE_DIR}/src/modulemanager.h
-${PROJECT_SOURCE_DIR}/src/jsonsessionloader.h
-${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.h
-${PROJECT_SOURCE_DIR}/src/moduleeventhandler.h
-${PROJECT_SOURCE_DIR}/src/customerdatasystem.h
-${PROJECT_SOURCE_DIR}/src/modman_util.h
-${PROJECT_SOURCE_DIR}/src/priorityarbitrationsystem.h
-${PROJECT_SOURCE_DIR}/src/zeradblogger.h
-${PROJECT_SOURCE_DIR}/src/licensesystem.h
-${PROJECT_SOURCE_DIR}/src/diriteratorworker.h
-    )
+file(GLOB SOURCES
+${PROJECT_SOURCE_DIR}/src/*.cpp
+)
 
 file(GLOB RESOURCES 
     ${PROJECT_SOURCE_DIR}/*.qrc
@@ -130,15 +112,15 @@ target_link_libraries(zera-modulemanager
     VeinMeta::VfTcp
     VeinMeta::VfNet2
     VeinMeta::VfHelpers
-    VeinMeta::VfQml
-    VeinMeta::VfScript
     VeinMeta::VfLogger
     VeinMeta::VfCpp
     VeinMeta::VfExport
     VeinMeta::VfFiles
-    VeinMeta::VfCryptoBridge
     ZeraClasses::MeasurementModuleInterface
     ZeraClasses::zeraproxy
+    VeinMeta::VfVeinmanager
+    VeinMeta::VfSession
+    VeinMeta::VfCustomerdata
 )	
 
 
