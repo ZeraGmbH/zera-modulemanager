@@ -185,7 +185,12 @@ void ModuleManager::startModule(const QString & t_uniqueModuleName, const QStrin
         }
         else if(m_licenseSystem->serialNumberIsInitialized())
         {
-            qWarning() << "Skipping module:" << t_uniqueModuleName << "No license found!";
+            if(tmpFactory != nullptr) {
+                qWarning() << "Skipping module:" << t_uniqueModuleName << "No license found!";
+            }
+            else {
+                qWarning() << "Could not create module:" << t_uniqueModuleName << "!";
+            }
             onModuleStartNext();
         }
         else //wait for serial number initialization
@@ -212,7 +217,7 @@ void ModuleManager::stopModules()
             //toStop->stopModule();
             if(m_factoryTable.contains(tmpModuleName))
             {
-                qDebug() << "Destroying module:" << tmpModuleName;
+                qInfo() << "Destroying module:" << tmpModuleName;
                 m_factoryTable.value(tmpModuleName)->destroyModule(toStop);
             }
         }
