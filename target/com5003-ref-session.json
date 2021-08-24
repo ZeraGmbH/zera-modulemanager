@@ -31,6 +31,11 @@
         "id": 1070
       },
       {
+        "name" : "sec1module",
+        "configPath" : "/etc/zera/modules/com5003-sec1module3.xml",
+        "id": 1130
+      },
+      {
         "name" : "scpimodule",
         "configPath" : "/etc/zera/modules/com5003-scpimodule.xml",
         "id": 9999
