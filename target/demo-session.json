@@ -2,7 +2,7 @@
     "modules" : [
       {
         "name" : "statusmodule",
-        "configPath" : "/etc/zera/modules/demo-statusmodule.xml",
+        "configFile" : "demo-statusmodule.xml",
         "id": 1150
       }
     ]
