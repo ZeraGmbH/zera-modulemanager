@@ -2,102 +2,102 @@
     "modules" : [
       {
         "name" : "statusmodule",
-        "configPath" : "/etc/zera/modules/com5003-statusmodule.xml",
+        "configFile" : "com5003-statusmodule.xml",
         "id": 1150
       },
       {
         "name" : "modemodule",
-        "configPath" : "/etc/zera/modules/com5003-modemoduleAC.xml",
+        "configFile" : "com5003-modemoduleAC.xml",
         "id": 1000
       },
       {
         "name" : "rangemodule",
-        "configPath" : "/etc/zera/modules/com5003-rangemodule.xml",
+        "configFile" : "com5003-rangemodule.xml",
         "id": 1020
       },
       {
         "name" : "samplemodule",
-        "configPath" : "/etc/zera/modules/com5003-samplemodule.xml",
+        "configFile" : "com5003-samplemodule.xml",
         "id": 1030
       },
       {
         "name" : "rmsmodule",
-        "configPath" : "/etc/zera/modules/com5003-rmsmodule.xml",
+        "configFile" : "com5003-rmsmodule.xml",
         "id": 1040
       },
       {
         "name" : "dftmodule",
-        "configPath" : "/etc/zera/modules/com5003-dftmodule.xml",
+        "configFile" : "com5003-dftmodule.xml",
         "id": 1050
       },
       {
         "name" : "fftmodule",
-        "configPath" : "/etc/zera/modules/com5003-fftmodule.xml",
+        "configFile" : "com5003-fftmodule.xml",
         "id": 1060
       },
       {
         "name" : "power1module",
-        "configPath" : "/etc/zera/modules/com5003-power1module.xml",
+        "configFile" : "com5003-power1module.xml",
         "id": 1070
       },
       {
         "name" : "power1module",
-        "configPath" : "/etc/zera/modules/com5003-power1module2.xml",
+        "configFile" : "com5003-power1module2.xml",
         "id": 1071
       },
       {
         "name" : "power1module",
-        "configPath" : "/etc/zera/modules/com5003-power1module3.xml",
+        "configFile" : "com5003-power1module3.xml",
         "id": 1072
       },
       {
         "name" : "power1module",
-        "configPath" : "/etc/zera/modules/com5003-power1module4.xml",
+        "configFile" : "com5003-power1module4.xml",
         "id": 1073
       },
       {
         "name" : "power3module",
-        "configPath" : "/etc/zera/modules/com5003-power3module.xml",
+        "configFile" : "com5003-power3module.xml",
         "id": 1100
       },
       {
         "name" : "thdnmodule",
-        "configPath" : "/etc/zera/modules/com5003-thdnmodule.xml",
+        "configFile" : "com5003-thdnmodule.xml",
         "id": 1110
       },
       {
         "name" : "thdnmodule",
-        "configPath" : "/etc/zera/modules/com5003-thdnmodule2.xml",
+        "configFile" : "com5003-thdnmodule2.xml",
         "id": 1111
       },
       {
         "name" : "oscimodule",
-        "configPath" : "/etc/zera/modules/com5003-oscimodule.xml",
+        "configFile" : "com5003-oscimodule.xml",
         "id": 1120
       },
       {
         "name" : "sec1module",
-        "configPath" : "/etc/zera/modules/com5003-sec1module.xml",
+        "configFile" : "com5003-sec1module.xml",
         "id": 1130
       },
       {
         "name" : "sec1module",
-        "configPath" : "/etc/zera/modules/com5003-sec1module2.xml",
+        "configFile" : "com5003-sec1module2.xml",
         "id": 1131
       },
       {
         "name" : "lambdamodule",
-        "configPath" : "/etc/zera/modules/com5003-lambdamodule.xml",
+        "configFile" : "com5003-lambdamodule.xml",
         "id": 1140
       },
       {
         "name" : "adjustmentmodule",
-        "configPath" : "/etc/zera/modules/com5003-adjustmentmodule.xml",
+        "configFile" : "com5003-adjustmentmodule.xml",
         "id": 1190
       },
       {
         "name" : "scpimodule",
-        "configPath" : "/etc/zera/modules/com5003-scpimodule.xml",
+        "configFile" : "com5003-scpimodule.xml",
         "id": 9999
       }
     ]

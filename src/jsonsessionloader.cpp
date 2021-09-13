@@ -42,23 +42,27 @@ void JsonSessionLoader::loadSession(QString t_filePath)
                         QJsonValue tmpObject = moduleArray.at(i);
                         if(tmpObject.isObject()) {
                             QJsonObject moduleObject = tmpObject.toObject();
-                            QString tmpNameString, tmpConfigString;
+                            QString tmpNameString, tmpConfigPath, tmpConfigFilePath;
                             int moduleId;
                             QFile tmpXmlConfigFile;
                             QByteArray xmlConfigData;
 
                             tmpNameString = moduleObject.value("name").toString();
-                            tmpConfigString = moduleObject.value("configPath").toString();
+                            tmpConfigPath = QString(MODMAN_CONFIG_PATH);
+                            if(!tmpConfigPath.endsWith("/")) {
+                                tmpConfigPath += "/";
+                            }
+                            tmpConfigFilePath = tmpConfigPath + moduleObject.value("configFile").toString();
                             moduleId = moduleObject.value("id").toInt();
 
-                            tmpXmlConfigFile.setFileName(tmpConfigString);
+                            tmpXmlConfigFile.setFileName(tmpConfigFilePath);
                             if(tmpXmlConfigFile.exists() && tmpXmlConfigFile.open(QIODevice::Unbuffered | QIODevice::ReadOnly)) {
                                 xmlConfigData = tmpXmlConfigFile.readAll();
                                 tmpXmlConfigFile.close();
-                                emit sigLoadModule(tmpNameString, tmpConfigString, xmlConfigData, moduleId);
+                                emit sigLoadModule(tmpNameString, tmpConfigFilePath, xmlConfigData, moduleId);
                             }
                             else {
-                                qWarning() << "Error opening config file for module:" << tmpNameString << "path:" << tmpConfigString;
+                                qWarning() << "Error opening config file for module:" << tmpNameString << "path:" << tmpConfigFilePath;
                             }
                         }
                     }
