@@ -110,6 +110,13 @@ set(CONFIG_FILES
     ${PROJECT_SOURCE_DIR}/modulemanager_config.json
 )
 
+# dummy targets to see files in qt-creator
+add_custom_target(zera-modulemanager-session-files ALL
+    SOURCES ${SESSION_FILES}
+    )
+add_custom_target(zera-modulemanager-config ALL
+    SOURCES ${CONFIG_FILES}
+    )
 
 #create executable
 add_executable(zera-modulemanager
