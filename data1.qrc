@@ -1,12 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>target/com5003-ref-session.json</file>
-        <file>target/com5003-meas-session.json</file>
-        <file>target/com5003-ced-session.json</file>
-        <file>target/demo-session.json</file>
         <file>scripts/data_logger.qml</file>
-        <file>modulemanager_config.json</file>
-        <file>target/mt310s2-meas-session.json</file>
         <file alias="license_cert.pem">test_cert.pem</file>
     </qresource>
 </RCC>
