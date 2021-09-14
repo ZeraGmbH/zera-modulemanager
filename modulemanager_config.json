@@ -11,7 +11,7 @@
     "customerdataSystemEnabled" : true
   },
   "demo" : {
-    "availableSessions" : ["demo-session.json"],
+    "availableSessions" : ["demo-session.json", "demo-session1.json"],
     "defaultSession" : "demo-session.json",
     "customerdataSystemEnabled" : true
   }

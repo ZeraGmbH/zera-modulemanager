@@ -1,0 +1,14 @@
+{
+    "modules" : [
+      {
+        "name" : "statusmodule",
+        "configFile" : "demo-statusmodule.xml",
+        "id": 1150
+      },
+      {
+        "name" : "rangemodule",
+        "configFile" : "demo-rangemodule.xml",
+        "id": 1020
+      }
+    ]
+}
