@@ -111,12 +111,23 @@ set(CONFIG_FILES
     ${PROJECT_SOURCE_DIR}/modulemanager_config.json
 )
 
-# dummy targets to see files in qt-creator
+# Note 1: In OE we do not (yet) have jsonlint-php so it must be optional
+# Note 2: In case we make COMMAND in target below conditional on JSONLINT,
+#         qt-creator does not display source-capabilities. That's what the
+#         'echo' dance is for
+find_program (JSONLINT NAMES jsonlint-php echo)
+if(${JSONLINT} MATCHES ".*echo.*")
+    message(WARNING "Program jsonlint-php not found. On Fedora install php-jsonlint")
+endif()
+
+# targets to see files in qt-creator and check for validity
 add_custom_target(zera-modulemanager-session-files ALL
     SOURCES ${SESSION_FILES}
+    COMMAND ${JSONLINT} ${SESSION_FILES}
     )
 add_custom_target(zera-modulemanager-config ALL
     SOURCES ${CONFIG_FILES}
+    COMMAND ${JSONLINT} ${CONFIG_FILES}
     )
 
 #create executable
