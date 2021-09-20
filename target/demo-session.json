@@ -9,6 +9,11 @@
         "name" : "rangemodule",
         "configFile" : "demo-rangemodule.xml",
         "id": 1020
+      },
+      {
+        "name" : "sourcemodule",
+        "configFile" : "demo-sourcemodule.xml",
+        "id": 1300
       }
     ]
 }
