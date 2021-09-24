@@ -116,6 +116,11 @@
         "id": 1210
       },
       {
+        "name" : "sourcemodule",
+        "configFile" : "demo-sourcemodule.xml",
+        "id": 1300
+      },
+      {
         "name" : "scpimodule",
         "configFile" : "mt310s2-scpimodule.xml",
         "id": 9999
