@@ -253,6 +253,8 @@ int main(int argc, char *argv[])
                             QStringLiteral(MODMAN_CUSTOMERDATA_PATH),
                             true);
 
+                filesModule->addTtyWatcher("Ttys");
+
                 // exports entity
                 evHandler->addSubsystem(exportModule->getVeinEntity());
                 exportModule->initOnce();
