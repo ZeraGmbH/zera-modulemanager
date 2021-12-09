@@ -39,8 +39,6 @@ find_Package(MeasurementModuleInterface REQUIRED)
 find_Package(zeraproxy REQUIRED)
 find_Package(VfCpp REQUIRED)
 
-option(MM_NO_CONFIG_INSTALL "Do not install configuration/session files - for debugging on PC" OFF)
-
 set(SET_MODMAN_SESSION_PATH "${CMAKE_INSTALL_SYSCONFDIR}/zera/modules/sessions/")
 set(SET_MODMAN_CONFIG_PATH  "${CMAKE_INSTALL_SYSCONFDIR}/zera/modules/")
 set(SET_MODMAN_MODULE_PATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/zera-modules/")
@@ -182,17 +180,15 @@ install(TARGETS zera-modulemanager
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
 
-if(NOT MM_NO_CONFIG_INSTALL)
-    install(
-        FILES ${SESSION_FILES}
-        DESTINATION ${SET_MODMAN_SESSION_PATH}
-        )
+install(
+    FILES ${SESSION_FILES}
+    DESTINATION ${SET_MODMAN_SESSION_PATH}
+    )
 
-    install(
-        FILES ${CONFIG_FILES}
-        DESTINATION ${SET_MODMAN_CONFIG_PATH}
-        )
-endif()
+install(
+    FILES ${CONFIG_FILES}
+    DESTINATION ${SET_MODMAN_CONFIG_PATH}
+    )
 
 # spawn out some info on configuration
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
