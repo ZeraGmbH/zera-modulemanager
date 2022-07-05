@@ -101,6 +101,7 @@ set(SESSION_FILES
     ${PROJECT_SOURCE_DIR}/target/com5003-ref-session.json 
     ${PROJECT_SOURCE_DIR}/target/com5003-ced-session.json 
     ${PROJECT_SOURCE_DIR}/target/mt310s2-meas-session.json
+    ${PROJECT_SOURCE_DIR}/target/mt310s2-dc-session.json
     ${PROJECT_SOURCE_DIR}/target/demo-session.json
     ${PROJECT_SOURCE_DIR}/target/demo-session1.json
 )
