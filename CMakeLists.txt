@@ -17,11 +17,9 @@ set(zeramodulemanager_VERSION_PATCH "0")
 
 set(PROJECT_VERSION "${zeramodulemanager_VERSION_MAJOR}.${zeramodulemanager_VERSION_MINOR}.${zeramodulemanager_VERSION_PATCH}")
 
-#Adding cmake functions like feature_summary()
 include(FeatureSummary)
 include(GNUInstallDirs)
 
-#Find dependecies
 find_package(Qt5 COMPONENTS Core Network Qml Concurrent CONFIG REQUIRED)
 find_package(VfEvent REQUIRED)
 find_package(VfComponent REQUIRED)
@@ -29,7 +27,6 @@ find_package(VfStorageHash REQUIRED)
 find_package(VfTcp REQUIRED)
 find_package(VfNet2 REQUIRED)
 find_package(VfHelpers REQUIRED)
-#find_package(VfQml REQUIRED)
 find_package(VfScript REQUIRED)
 find_package(VfLogger REQUIRED)
 find_package(VfCryptoBridge REQUIRED)
@@ -63,33 +60,30 @@ foreach( d ${DirDefs} )
     message( STATUS "Found Define: " ${d} )
 endforeach()
 
-
-#sum up project Files 
 set(SOURCES
-${PROJECT_SOURCE_DIR}/src/main.cpp
-${PROJECT_SOURCE_DIR}/src/modulemanager.cpp
-${PROJECT_SOURCE_DIR}/src/jsonsessionloader.cpp
-${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.cpp
-${PROJECT_SOURCE_DIR}/src/moduleeventhandler.cpp
-${PROJECT_SOURCE_DIR}/src/customerdatasystem.cpp
-${PROJECT_SOURCE_DIR}/src/priorityarbitrationsystem.cpp
-${PROJECT_SOURCE_DIR}/src/zeradblogger.cpp
-${PROJECT_SOURCE_DIR}/src/licensesystem.cpp
-${PROJECT_SOURCE_DIR}/src/diriteratorworker.cpp
+    ${PROJECT_SOURCE_DIR}/src/main.cpp
+    ${PROJECT_SOURCE_DIR}/src/modulemanager.cpp
+    ${PROJECT_SOURCE_DIR}/src/jsonsessionloader.cpp
+    ${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.cpp
+    ${PROJECT_SOURCE_DIR}/src/moduleeventhandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/customerdatasystem.cpp
+    ${PROJECT_SOURCE_DIR}/src/priorityarbitrationsystem.cpp
+    ${PROJECT_SOURCE_DIR}/src/zeradblogger.cpp
+    ${PROJECT_SOURCE_DIR}/src/licensesystem.cpp
+    ${PROJECT_SOURCE_DIR}/src/diriteratorworker.cpp
     )
 
-
 set(HEADER
-${PROJECT_SOURCE_DIR}/src/modulemanager.h
-${PROJECT_SOURCE_DIR}/src/jsonsessionloader.h
-${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.h
-${PROJECT_SOURCE_DIR}/src/moduleeventhandler.h
-${PROJECT_SOURCE_DIR}/src/customerdatasystem.h
-${PROJECT_SOURCE_DIR}/src/modman_util.h
-${PROJECT_SOURCE_DIR}/src/priorityarbitrationsystem.h
-${PROJECT_SOURCE_DIR}/src/zeradblogger.h
-${PROJECT_SOURCE_DIR}/src/licensesystem.h
-${PROJECT_SOURCE_DIR}/src/diriteratorworker.h
+    ${PROJECT_SOURCE_DIR}/src/modulemanager.h
+    ${PROJECT_SOURCE_DIR}/src/jsonsessionloader.h
+    ${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.h
+    ${PROJECT_SOURCE_DIR}/src/moduleeventhandler.h
+    ${PROJECT_SOURCE_DIR}/src/customerdatasystem.h
+    ${PROJECT_SOURCE_DIR}/src/modman_util.h
+    ${PROJECT_SOURCE_DIR}/src/priorityarbitrationsystem.h
+    ${PROJECT_SOURCE_DIR}/src/zeradblogger.h
+    ${PROJECT_SOURCE_DIR}/src/licensesystem.h
+    ${PROJECT_SOURCE_DIR}/src/diriteratorworker.h
     )
 
 file(GLOB RESOURCES 
@@ -129,15 +123,12 @@ add_custom_target(zera-modulemanager-config ALL
     COMMAND ${JSONLINT} ${CONFIG_FILES}
     )
 
-#create executable
 add_executable(zera-modulemanager
     ${SOURCES}
     ${HEADER}
     ${RESOURCES}
     )
 
-
-#link dependencies
 target_link_libraries(zera-modulemanager
     PRIVATE
     Qt5::Core
@@ -158,11 +149,7 @@ target_link_libraries(zera-modulemanager
     VeinMeta::VfCryptoBridge
     ZeraClasses::MeasurementModuleInterface
     ZeraClasses::zeraproxy
-)	
-
-
-
-
+)
 
 # announce headers - target perspective
 target_include_directories(zera-modulemanager
@@ -173,9 +160,6 @@ target_include_directories(zera-modulemanager
     ${CMAKE_CURRENT_SOURCE_DIR}
     )
 
-
-
-#install zera-modulemanagerto bin 
 install(TARGETS zera-modulemanager
     EXPORT zera-modulemanagerExport
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -191,11 +175,4 @@ install(
     DESTINATION ${SET_MODMAN_CONFIG_PATH}
     )
 
-# spawn out some info on configuration
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
-
-
-
-
-
-
