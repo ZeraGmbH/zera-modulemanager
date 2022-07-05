@@ -1,7 +1,7 @@
 {
   "deviceName" : "com5003",
   "mt310s2" : {
-    "availableSessions" : ["mt310s2-meas-session.json"],
+    "availableSessions" : ["mt310s2-meas-session.json", "mt310s2-dc-session.json"],
     "defaultSession" : "mt310s2-meas-session.json",
     "customerdataSystemEnabled" : true
   },
