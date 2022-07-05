@@ -47,7 +47,7 @@ public:
      */
     bool loadModules();
     /**
-     * @brief loads the scripts for the ScriptSystem from the qrc resource ":/scripts"
+     * @brief loads the qml-scripts for the ScriptSystem from the qrc resource ":/qml"
      * @param t_scriptSystem
      */
     void loadScripts(VeinScript::ScriptSystem *t_scriptSystem);
