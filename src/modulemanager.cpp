@@ -115,8 +115,8 @@ bool ModuleManager::loadModules()
 
 void ModuleManager::loadScripts(VeinScript::ScriptSystem *t_scriptSystem)
 {
-    //load builtin scripts
-    const QDir virtualFiles(":/scripts");
+    //load builtin qml-scripts
+    const QDir virtualFiles(":/qml");
     const QStringList scriptList = virtualFiles.entryList();
     for(const QString &scriptFilePath : scriptList)
     {
