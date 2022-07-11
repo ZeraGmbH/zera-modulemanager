@@ -1,7 +1,7 @@
 #include "modulemanagerconfig.h"
-#include <QFile>
-#include <QJsonObject>
+#include <zera-jsonfileloader.h>
 #include <QJsonArray>
+#include <QFile>
 
 ModulemanagerConfig* ModulemanagerConfig::m_instance = nullptr;
 std::once_flag ModulemanagerConfig::m_onceflag;
@@ -14,7 +14,7 @@ ModulemanagerConfig *ModulemanagerConfig::getInstance()
 
 bool ModulemanagerConfig::isValid()
 {
-    return !m_jsonConfig.isEmpty() && m_jsonConfig.isObject();
+    return !m_jsonConfig.isEmpty();
 }
 
 const QString ModulemanagerConfig::getDeviceName()
@@ -42,6 +42,16 @@ const QString ModulemanagerConfig::getDefaultSession()
     return devJson.value("defaultSession").toString();
 }
 
+void ModulemanagerConfig::setDefaultSession(QString session)
+{
+    if(getDefaultSession() != session && getAvailableSessions().contains(session)) {
+        QJsonObject devJson = getDeviceJson();
+        devJson["defaultSession"] = session;
+        setDeviceJson(devJson);
+        save();
+    }
+}
+
 const QString ModulemanagerConfig::getDevNameFromUBoot()
 {
     QString strDeviceName;
@@ -65,17 +75,24 @@ const QString ModulemanagerConfig::getDevNameFromUBoot()
 
 QJsonObject ModulemanagerConfig::getDeviceJson()
 {
-    return isValid() ? m_jsonConfig.object().value(m_deviceName).toObject() : QJsonObject();
+    return isValid() ? m_jsonConfig[m_deviceName].toObject() : QJsonObject();
+}
+
+void ModulemanagerConfig::setDeviceJson(QJsonObject devJson)
+{
+    m_jsonConfig[m_deviceName] = devJson;
+}
+
+void ModulemanagerConfig::save()
+{
+    cJsonFileLoader::storeJsonFile(MODMAN_CONFIG_FILE, m_jsonConfig);
 }
 
 ModulemanagerConfig::ModulemanagerConfig()
 {
     m_deviceName = getDevNameFromUBoot();
-    QFile configFile(MODMAN_CONFIG_FILE);
-    if(configFile.open(QFile::ReadOnly)) {
-        m_jsonConfig = QJsonDocument::fromJson(configFile.readAll());
-        if(m_deviceName.isEmpty() && isValid()) {
-            m_deviceName = m_jsonConfig.object().value("deviceName").toString();
-        }
+    m_jsonConfig = cJsonFileLoader::loadJsonFile(MODMAN_CONFIG_FILE);
+    if(m_deviceName.isEmpty() && isValid()) {
+        m_deviceName = m_jsonConfig["deviceName"].toString();
     }
 }

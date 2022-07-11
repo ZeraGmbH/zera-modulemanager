@@ -35,6 +35,7 @@ find_package(VfFiles REQUIRED)
 find_Package(MeasurementModuleInterface REQUIRED)
 find_Package(zeraproxy REQUIRED)
 find_Package(VfCpp REQUIRED)
+find_package(zera-json-params REQUIRED)
 
 set(SET_MODMAN_SESSION_PATH "${CMAKE_INSTALL_SYSCONFDIR}/zera/modules/sessions/")
 set(SET_MODMAN_CONFIG_PATH  "${CMAKE_INSTALL_SYSCONFDIR}/zera/modules/")
@@ -151,6 +152,7 @@ target_link_libraries(zera-modulemanager
     VeinMeta::VfCryptoBridge
     ZeraClasses::MeasurementModuleInterface
     ZeraClasses::zeraproxy
+    zera-json-params
 )
 
 # announce headers - target perspective
