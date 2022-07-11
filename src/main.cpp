@@ -2,6 +2,7 @@
 #include "jsonsessionloader.h"
 #include "modulemanagercontroller.h"
 #include "moduleeventhandler.h"
+#include "modulemanagerconfig.h"
 #include "customerdatasystem.h"
 #include "priorityarbitrationsystem.h"
 #include "zeradblogger.h"
@@ -46,30 +47,25 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    const QJsonDocument defaultConfig = ModulemanagerConfig::getDefaultConfig();
-    if(!ModulemanagerConfig::isValidConfig(defaultConfig)) {
+    ModulemanagerConfig* mmConfig = ModulemanagerConfig::getInstance();
+    if(!mmConfig->isValid()) {
         qCritical() << "Error loading config file from path:" << MODMAN_CONFIG_FILE;
         return -ENOENT;
     }
-    const QString deviceNameUBoot = ModulemanagerConfig::getDevNameFromUBoot();
-    const QString deviceName = !deviceNameUBoot.isEmpty() ? deviceNameUBoot : defaultConfig.object().value("deviceName").toString();
-    if(deviceName.isEmpty())
-    {
+    const QString deviceName = mmConfig->getDeviceName();
+    if(deviceName.isEmpty()) {
         qCritical() << "No device name found in kernel cmdline or default config!";
         return -ENODEV;
     }
     qInfo() << "Loading session data for " << deviceName;
-    const bool customerdataSystemEnabled = defaultConfig.object().value(deviceName).toObject().value("customerdataSystemEnabled").toBool(false);
-    const QVariant tmpAvailList = defaultConfig.object().value(deviceName).toObject().value("availableSessions").toArray().toVariantList();
-    const QStringList availableSessionList = tmpAvailList.toStringList();
-    if(availableSessionList.isEmpty())
-    {
+    const bool customerdataSystemEnabled = mmConfig->getCustomerDataEnabled();
+    const QStringList availableSessionList = mmConfig->getAvailableSessions();
+    if(availableSessionList.isEmpty()) {
         qCritical() << "No sessions found for device" << deviceName;
         return -ENODEV;
     }
-    const QString defaultSessionFile = defaultConfig.object().value(deviceName).toObject().value("defaultSession").toString();
-    if(defaultSessionFile.isEmpty())
-    {
+    const QString defaultSessionFile = mmConfig->getDefaultSession();
+    if(defaultSessionFile.isEmpty()) {
         qCritical() << "No default session found for device" << deviceName;
         return -ENODEV;
     }

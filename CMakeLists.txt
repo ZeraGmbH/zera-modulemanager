@@ -71,6 +71,7 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/src/zeradblogger.cpp
     ${PROJECT_SOURCE_DIR}/src/licensesystem.cpp
     ${PROJECT_SOURCE_DIR}/src/diriteratorworker.cpp
+    ${PROJECT_SOURCE_DIR}/src/modulemanagerconfig.cpp
     )
 
 set(HEADER
@@ -84,6 +85,7 @@ set(HEADER
     ${PROJECT_SOURCE_DIR}/src/zeradblogger.h
     ${PROJECT_SOURCE_DIR}/src/licensesystem.h
     ${PROJECT_SOURCE_DIR}/src/diriteratorworker.h
+    ${PROJECT_SOURCE_DIR}/src/modulemanagerconfig.h
     )
 
 file(GLOB RESOURCES 
