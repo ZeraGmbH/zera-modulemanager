@@ -1,6 +1,5 @@
 #include "jsonsessionloader.h"
 #include <zera-jsonfileloader.h>
-#include <QByteArray>
 #include <QFile>
 #include <QJsonArray>
 #include <QDebug>
@@ -24,33 +23,9 @@ void JsonSessionLoader::loadSession(QString t_filePath)
         if(jsonError.error == QJsonParseError::NoError) {
             QJsonValue tmpModules = rootObj.value("modules");
             if(tmpModules.isArray()) {
-                QJsonArray moduleArray = tmpModules.toArray();
-                for(int i = 0; i < moduleArray.count(); i++) {
-                    QJsonValue tmpObject = moduleArray.at(i);
-                    if(tmpObject.isObject()) {
-                        QJsonObject moduleObject = tmpObject.toObject();
-                        QString tmpNameString, tmpConfigPath, tmpConfigFilePath;
-                        int moduleId;
-                        QFile tmpXmlConfigFile;
-                        QByteArray xmlConfigData;
-
-                        tmpNameString = moduleObject.value("name").toString();
-                        tmpConfigPath = QString(MODMAN_CONFIG_PATH);
-                        if(!tmpConfigPath.endsWith("/")) {
-                            tmpConfigPath += "/";
-                        }
-                        tmpConfigFilePath = tmpConfigPath + moduleObject.value("configFile").toString();
-                        moduleId = moduleObject.value("id").toInt();
-
-                        tmpXmlConfigFile.setFileName(tmpConfigFilePath);
-                        if(tmpXmlConfigFile.exists() && tmpXmlConfigFile.open(QIODevice::Unbuffered | QIODevice::ReadOnly)) {
-                            xmlConfigData = tmpXmlConfigFile.readAll();
-                            tmpXmlConfigFile.close();
-                            emit sigLoadModule(tmpNameString, tmpConfigFilePath, xmlConfigData, moduleId);
-                        }
-                        else {
-                            qWarning() << "Error opening config file for module:" << tmpNameString << "path:" << tmpConfigFilePath;
-                        }
+                for(auto entry : tmpModules.toArray()) {
+                    if(entry.isObject()) {
+                        parseModule(entry.toObject());
                     }
                 }
             }
@@ -64,5 +39,31 @@ void JsonSessionLoader::loadSession(QString t_filePath)
     }
     else {
         qWarning() << "Error opening session file:" << t_filePath;
+    }
+}
+
+void JsonSessionLoader::parseModule(QJsonObject moduleObject)
+{
+    QString tmpNameString, tmpConfigPath, tmpConfigFilePath;
+    int moduleId;
+    QFile tmpXmlConfigFile;
+    QByteArray xmlConfigData;
+
+    tmpNameString = moduleObject.value("name").toString();
+    tmpConfigPath = QString(MODMAN_CONFIG_PATH);
+    if(!tmpConfigPath.endsWith("/")) {
+        tmpConfigPath += "/";
+    }
+    tmpConfigFilePath = tmpConfigPath + moduleObject.value("configFile").toString();
+    moduleId = moduleObject.value("id").toInt();
+
+    tmpXmlConfigFile.setFileName(tmpConfigFilePath);
+    if(tmpXmlConfigFile.exists() && tmpXmlConfigFile.open(QIODevice::Unbuffered | QIODevice::ReadOnly)) {
+        xmlConfigData = tmpXmlConfigFile.readAll();
+        tmpXmlConfigFile.close();
+        emit sigLoadModule(tmpNameString, tmpConfigFilePath, xmlConfigData, moduleId);
+    }
+    else {
+        qWarning() << "Error opening config file for module:" << tmpNameString << "path:" << tmpConfigFilePath;
     }
 }
