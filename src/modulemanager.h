@@ -31,14 +31,6 @@ class ModuleEventHandler;
 class MeasurementModuleFactory;
 class LicenseSystem;
 
-
-namespace ModulemanagerConfig
-{
-    QJsonDocument getDefaultConfig();
-    bool isValidConfig(const QJsonDocument config);
-    const QString getDevNameFromUBoot();
-}
-
 namespace ZeraModules
 {
 class ModuleData;
