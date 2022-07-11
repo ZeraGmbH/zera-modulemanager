@@ -46,13 +46,12 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    const QJsonDocument defaultConfig = ZeraModulemanager::getDefaultConfig();
-    if(defaultConfig.isEmpty() || defaultConfig.isObject() == false)
-    {
+    const QJsonDocument defaultConfig = ModulemanagerConfig::getDefaultConfig();
+    if(!ModulemanagerConfig::isValidConfig(defaultConfig)) {
         qCritical() << "Error loading config file from path:" << MODMAN_CONFIG_FILE;
         return -ENOENT;
     }
-    const QString deviceNameUBoot = ZeraModulemanager::getDevNameFromUBoot();
+    const QString deviceNameUBoot = ModulemanagerConfig::getDevNameFromUBoot();
     const QString deviceName = !deviceNameUBoot.isEmpty() ? deviceNameUBoot : defaultConfig.object().value("deviceName").toString();
     if(deviceName.isEmpty())
     {
