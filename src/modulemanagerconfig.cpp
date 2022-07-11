@@ -2,6 +2,8 @@
 #include <zera-jsonfileloader.h>
 #include <QJsonArray>
 #include <QFile>
+#include <QVariant>
+#include <QDebug>
 
 ModulemanagerConfig* ModulemanagerConfig::m_instance = nullptr;
 std::once_flag ModulemanagerConfig::m_onceflag;
