@@ -29,6 +29,7 @@ public slots:
     void loadSession(QString t_filePath);
 
 private:
+    void parseModule(QJsonObject moduleObject);
     QString m_currentSessionFile;
 };
 
