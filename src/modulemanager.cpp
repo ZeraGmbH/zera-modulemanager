@@ -16,6 +16,41 @@
 #include <QCoreApplication>
 #include <QDebug>
 
+namespace ZeraModulemanager
+{
+QJsonDocument getDefaultConfig()
+{
+    QJsonDocument retVal;
+    QFile configFile(MODMAN_CONFIG_FILE);
+    if(configFile.exists() && configFile.open(QFile::ReadOnly))
+    {
+        retVal = QJsonDocument::fromJson(configFile.readAll());
+    }
+    return retVal;
+}
+const QString getDevNameFromUBoot()
+{
+    QString strDeviceName;
+    // Check for kernel cmdline param which u-boot should set
+    QFile procFileCmdLine(QLatin1String("/proc/cmdline"));
+    if(procFileCmdLine.open(QIODevice::ReadOnly))
+    {
+        QString cmdLine = procFileCmdLine.readAll();
+        procFileCmdLine.close();
+        // Extract 'zera_device=<device_name>'
+        QRegExp regExp(QLatin1String("\\bzera_device=[^ ]*"));
+        if(regExp.indexIn(cmdLine) != -1)
+        {
+            strDeviceName = regExp.cap(0);
+            // The following should go in regex above but...
+            strDeviceName.replace(QLatin1String("zera_device="), QLatin1String(""));
+            strDeviceName.replace(QLatin1String("\n"), QLatin1String(""));
+            qInfo() << "ZERA Device from kernel cmdline: " << strDeviceName;
+        }
+    }
+    return strDeviceName;
+}
+}
 
 namespace ZeraModules
 {
