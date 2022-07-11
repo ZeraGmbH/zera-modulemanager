@@ -32,9 +32,10 @@ class MeasurementModuleFactory;
 class LicenseSystem;
 
 
-namespace ZeraModulemanager
+namespace ModulemanagerConfig
 {
     QJsonDocument getDefaultConfig();
+    bool isValidConfig(const QJsonDocument config);
     const QString getDevNameFromUBoot();
 }
 

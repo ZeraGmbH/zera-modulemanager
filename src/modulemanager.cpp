@@ -16,18 +16,23 @@
 #include <QCoreApplication>
 #include <QDebug>
 
-namespace ZeraModulemanager
+namespace ModulemanagerConfig
 {
 QJsonDocument getDefaultConfig()
 {
     QJsonDocument retVal;
     QFile configFile(MODMAN_CONFIG_FILE);
-    if(configFile.exists() && configFile.open(QFile::ReadOnly))
-    {
+    if(configFile.exists() && configFile.open(QFile::ReadOnly)) {
         retVal = QJsonDocument::fromJson(configFile.readAll());
     }
     return retVal;
 }
+
+bool isValidConfig(const QJsonDocument config)
+{
+    return !config.isEmpty() && config.isObject();
+}
+
 const QString getDevNameFromUBoot()
 {
     QString strDeviceName;
@@ -336,8 +341,7 @@ void ModuleManager::delayedModuleStartNext()
 void ModuleManager::onModuleStartNext()
 {
     m_moduleStartLock = false;
-    if(m_deferredStartList.length()>0)
-    {
+    if(m_deferredStartList.length() > 0) {
         ModuleData *tmpData = m_deferredStartList.dequeue();
         qDebug() << "###deferred module start for" << tmpData->m_uniqueName;
         startModule(tmpData->m_uniqueName, tmpData->m_configPath, tmpData->m_configData, tmpData->m_moduleId);
