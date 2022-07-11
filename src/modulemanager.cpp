@@ -306,8 +306,9 @@ void ModuleManager::onModuleStartNext()
         startModule(tmpData->m_uniqueName, tmpData->m_configPath, tmpData->m_configData, tmpData->m_moduleId);
         delete tmpData;
     }
-    else
-    {
+    else {
+        ModulemanagerConfig *mmConfig = ModulemanagerConfig::getInstance();
+        mmConfig->setDefaultSession(m_sessionPath);
         emit sigModulesLoaded(m_sessionPath, m_sessionsAvailable);
     }
 }
