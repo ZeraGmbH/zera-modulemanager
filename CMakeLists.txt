@@ -94,13 +94,13 @@ file(GLOB RESOURCES
     )
 
 set(SESSION_FILES
-    ${PROJECT_SOURCE_DIR}/target/com5003-meas-session.json 
-    ${PROJECT_SOURCE_DIR}/target/com5003-ref-session.json 
-    ${PROJECT_SOURCE_DIR}/target/com5003-ced-session.json 
-    ${PROJECT_SOURCE_DIR}/target/mt310s2-meas-session.json
-    ${PROJECT_SOURCE_DIR}/target/mt310s2-dc-session.json
-    ${PROJECT_SOURCE_DIR}/target/demo-session.json
-    ${PROJECT_SOURCE_DIR}/target/demo-session1.json
+    ${PROJECT_SOURCE_DIR}/sessions/com5003-meas-session.json
+    ${PROJECT_SOURCE_DIR}/sessions/com5003-ref-session.json
+    ${PROJECT_SOURCE_DIR}/sessions/com5003-ced-session.json
+    ${PROJECT_SOURCE_DIR}/sessions/mt310s2-meas-session.json
+    ${PROJECT_SOURCE_DIR}/sessions/mt310s2-dc-session.json
+    ${PROJECT_SOURCE_DIR}/sessions/demo-session.json
+    ${PROJECT_SOURCE_DIR}/sessions/demo-session1.json
 )
 
 set(CONFIG_FILES
