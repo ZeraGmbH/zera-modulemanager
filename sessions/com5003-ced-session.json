@@ -86,6 +86,11 @@
         "id": 1140
       },
       {
+        "name" : "sem1module",
+        "configFile" : "com5003-sem1module.xml",
+        "id": 1200
+      },
+      {
         "name" : "scpimodule",
         "configFile" : "com5003-scpimodule.xml",
         "id": 9999
