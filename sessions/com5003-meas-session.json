@@ -96,6 +96,11 @@
         "id": 1190
       },
       {
+        "name" : "sem1module",
+        "configFile" : "com5003-sem1module.xml",
+        "id": 1200
+      },
+      {
         "name" : "sourcemodule",
         "configFile" : "demo-sourcemodule.xml",
         "id": 1300
