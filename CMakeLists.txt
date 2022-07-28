@@ -180,13 +180,4 @@ install(
     DESTINATION ${SET_MODMAN_CONFIG_PATH}
     )
 
-# For debugging on build host with qt-creator: run ${CMAKE_INSTALL_BINDIR}/change-modules-ip <machine-ip>
-configure_file(scripts/change-modules-ip.in change-modules-ip @ONLY)
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    install(
-        PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/change-modules-ip
-        DESTINATION ${CMAKE_INSTALL_BINDIR}
-        )
-endif()
-
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
