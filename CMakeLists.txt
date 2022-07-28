@@ -105,7 +105,7 @@ set(SESSION_FILES
 
 set(CONFIG_FILES
     ${PROJECT_SOURCE_DIR}/modulemanager_config.json
-    ${PROJECT_SOURCE_DIR}/modulemanager_config-dc.json
+    ${PROJECT_SOURCE_DIR}/modulemanager_config_dev.json
 )
 
 # Note 1: In OE we do not (yet) have jsonlint-php so it must be optional
