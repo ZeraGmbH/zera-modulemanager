@@ -309,6 +309,7 @@ void ModuleManager::onModuleStartNext()
     else {
         ModulemanagerConfig *mmConfig = ModulemanagerConfig::getInstance();
         mmConfig->setDefaultSession(m_sessionPath);
+        qInfo("All modules loaded");
         emit sigModulesLoaded(m_sessionPath, m_sessionsAvailable);
     }
 }
