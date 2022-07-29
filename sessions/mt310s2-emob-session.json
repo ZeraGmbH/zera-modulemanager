@@ -56,6 +56,11 @@
         "id": 1120
       },
       {
+        "name" : "sec1module",
+        "configFile" : "mt310s2-sec1module_f1f3.xml",
+        "id": 1130
+      },
+      {
         "name" : "adjustmentmodule",
         "configFile" : "mt310s2-adjustmentmodule.xml",
         "id": 1190
