@@ -12,7 +12,7 @@
       },
       {
         "name" : "rangemodule",
-        "configFile" : "mt310s2-rangemodule-dc.xml",
+        "configFile" : "mt310s2-rangemodule-ac3-dc1.xml",
         "id": 1020
       },
       {
