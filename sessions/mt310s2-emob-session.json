@@ -66,6 +66,11 @@
         "id": 1190
       },
       {
+        "name" : "sem1module",
+        "configFile" : "mt310s2-sem1module_f1f3.xml",
+        "id": 1200
+      },
+      {
         "name" : "sourcemodule",
         "configFile" : "demo-sourcemodule.xml",
         "id": 1300
