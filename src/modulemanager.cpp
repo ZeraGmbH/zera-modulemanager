@@ -302,7 +302,7 @@ void ModuleManager::onModuleStartNext()
     m_moduleStartLock = false;
     if(m_deferredStartList.length() > 0) {
         ModuleData *tmpData = m_deferredStartList.dequeue();
-        qDebug() << "###deferred module start for" << tmpData->m_uniqueName;
+        qInfo("Loading module %s...", qPrintable(tmpData->m_uniqueName));
         startModule(tmpData->m_uniqueName, tmpData->m_configPath, tmpData->m_configData, tmpData->m_moduleId);
         delete tmpData;
     }
