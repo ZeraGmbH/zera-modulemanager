@@ -32,17 +32,17 @@
       },
       {
         "name" : "power1module",
-        "configFile" : "mt310s2-power1module.xml",
+        "configFile" : "mt310s2-power1module-4WA-only.xml",
         "id": 1070
       },
       {
         "name" : "power1module",
-        "configFile" : "mt310s2-power1module2.xml",
+        "configFile" : "mt310s2-power1module-4WR-only.xml",
         "id": 1071
       },
       {
         "name" : "power1module",
-        "configFile" : "mt310s2-power1module3.xml",
+        "configFile" : "mt310s2-power1module-4WAP-only.xml",
         "id": 1072
       },
       {
