@@ -45,10 +45,11 @@ set(SET_MODMAN_CUSTOMERDATA_PATH "/home/operator/customerdata/" CACHE STRING "Cu
 set(SET_MODMAN_CUST_CONTENTSET_PATH "/home/operator/logger-contentsets/" CACHE STRING "Logger contentset path")
 set(SET_MODMAN_AUTOMOUNT_PATH "/media/" CACHE STRING "Automount path")
 set(SET_MODMAN_LOGGER_LOCAL_PATH "/home/operator/logger" CACHE STRING "Logger local storage path")
+set(SET_MODMAN_DEFAULT_SESSION "modulemanager_config.json" CACHE STRING "Default session")
 
 add_definitions(-DMODMAN_SESSION_PATH="${SET_MODMAN_SESSION_PATH}")
 add_definitions(-DMODMAN_CONFIG_PATH="${SET_MODMAN_CONFIG_PATH}")
-add_definitions(-DMODMAN_CONFIG_FILE="${SET_MODMAN_CONFIG_PATH}/modulemanager_config.json")
+add_definitions(-DMODMAN_CONFIG_FILE="${SET_MODMAN_CONFIG_PATH}/${SET_MODMAN_DEFAULT_SESSION}")
 add_definitions(-DMODMAN_MODULE_PATH="${SET_MODMAN_MODULE_PATH}")
 add_definitions(-DMODMAN_CUSTOMERDATA_PATH="${SET_MODMAN_CUSTOMERDATA_PATH}")
 add_definitions(-DMODMAN_CONTENTSET_PATH="${SET_MODMAN_CONTENTSET_PATH}")
