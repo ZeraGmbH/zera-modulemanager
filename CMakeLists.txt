@@ -120,7 +120,15 @@ if(${JSONLINT} MATCHES ".*echo.*")
     message(WARNING "Program jsonlint-php not found. On Fedora install php-jsonlint")
 endif()
 
+set(zeraContentSetFile "${PROJECT_SOURCE_DIR}/loggerconfigs/ZeraContext.json")
+set(customerContentSetFile "${PROJECT_SOURCE_DIR}/loggerconfigs/CustomerContext.json")
+
 # targets to see files in qt-creator and check for validity
+add_custom_target(logger-content-sets ALL
+    SOURCES ${zeraContentSetFile} ${customerContentSetFile}
+    COMMAND ${JSONLINT} ${zeraContentSetFile} ${customerContentSetFile}
+    )
+
 add_custom_target(zera-modulemanager-session-files ALL
     SOURCES ${SESSION_FILES}
     COMMAND ${JSONLINT} ${SESSION_FILES}
@@ -159,7 +167,6 @@ target_link_libraries(zera-modulemanager
     zera-json-params
 )
 
-# announce headers - target perspective
 target_include_directories(zera-modulemanager
     PUBLIC
     $<BUILD_INTERFACE:${MY_LIBRARY_SOURCE_DIR}/include>
@@ -181,6 +188,17 @@ install(
 install(
     FILES ${CONFIG_FILES}
     DESTINATION ${SET_MODMAN_CONFIG_PATH}
+    )
+
+# install ContentSet files
+install(
+    FILES ${zeraContentSetFile}
+    DESTINATION ${SET_MODMAN_CONTENTSET_PATH}
+    )
+
+install(
+    FILES ${customerContentSetFile}
+    DESTINATION ${SET_MODMAN_CUST_CONTENTSET_PATH}
     )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
