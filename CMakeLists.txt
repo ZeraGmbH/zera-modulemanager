@@ -94,16 +94,8 @@ file(GLOB RESOURCES
     ${PROJECT_SOURCE_DIR}/*.qrc
     )
 
-set(SESSION_FILES
-    ${PROJECT_SOURCE_DIR}/sessions/com5003-meas-session.json
-    ${PROJECT_SOURCE_DIR}/sessions/com5003-ref-session.json
-    ${PROJECT_SOURCE_DIR}/sessions/com5003-ced-session.json
-    ${PROJECT_SOURCE_DIR}/sessions/mt310s2-meas-session.json
-    ${PROJECT_SOURCE_DIR}/sessions/mt310s2-ced-session.json
-    ${PROJECT_SOURCE_DIR}/sessions/mt310s2-dc-session.json
-    ${PROJECT_SOURCE_DIR}/sessions/mt310s2-emob-session.json
-    ${PROJECT_SOURCE_DIR}/sessions/demo-session.json
-    ${PROJECT_SOURCE_DIR}/sessions/demo-session1.json
+file(GLOB SESSION_FILES
+    ${PROJECT_SOURCE_DIR}/sessions/*.json
 )
 
 set(CONFIG_FILES
