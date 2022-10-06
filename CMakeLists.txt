@@ -103,6 +103,10 @@ set(CONFIG_FILES
     ${PROJECT_SOURCE_DIR}/modulemanager_config_dev.json
 )
 
+file(GLOB LOGGER_CONFIG_FILES
+    ${PROJECT_SOURCE_DIR}/loggerconfigs/*.json
+)
+
 # Note 1: In OE we do not (yet) have jsonlint-php so it must be optional
 # Note 2: In case we make COMMAND in target below conditional on JSONLINT,
 #         qt-creator does not display source-capabilities. That's what the
@@ -112,13 +116,10 @@ if(${JSONLINT} MATCHES ".*echo.*")
     message(WARNING "Program jsonlint-php not found. On Fedora install php-jsonlint")
 endif()
 
-set(zeraContentSetFile "${PROJECT_SOURCE_DIR}/loggerconfigs/ZeraContext.json")
-set(customerContentSetFile "${PROJECT_SOURCE_DIR}/loggerconfigs/CustomerContext.json")
-
 # targets to see files in qt-creator and check for validity
-add_custom_target(logger-content-sets ALL
-    SOURCES ${zeraContentSetFile} ${customerContentSetFile}
-    COMMAND ${JSONLINT} ${zeraContentSetFile} ${customerContentSetFile}
+add_custom_target(logger-config-files ALL
+    SOURCES ${LOGGER_CONFIG_FILES}
+    COMMAND ${JSONLINT} ${LOGGER_CONFIG_FILES}
     )
 
 add_custom_target(zera-modulemanager-session-files ALL
@@ -182,15 +183,9 @@ install(
     DESTINATION ${SET_MODMAN_CONFIG_PATH}
     )
 
-# install ContentSet files
 install(
-    FILES ${zeraContentSetFile}
+    FILES ${LOGGER_CONFIG_FILES}
     DESTINATION ${SET_MODMAN_CONTENTSET_PATH}
-    )
-
-install(
-    FILES ${customerContentSetFile}
-    DESTINATION ${SET_MODMAN_CUST_CONTENTSET_PATH}
     )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
