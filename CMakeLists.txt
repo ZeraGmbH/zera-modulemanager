@@ -20,7 +20,7 @@ set(PROJECT_VERSION "${zeramodulemanager_VERSION_MAJOR}.${zeramodulemanager_VERS
 include(FeatureSummary)
 include(GNUInstallDirs)
 
-find_package(Qt5 COMPONENTS Core Network Qml Concurrent CONFIG REQUIRED)
+find_package(Qt5 COMPONENTS Core Network Qml Concurrent Test CONFIG REQUIRED)
 find_package(VfEvent REQUIRED)
 find_package(VfComponent REQUIRED)
 find_package(VfStorageHash REQUIRED)
@@ -63,36 +63,64 @@ foreach( d ${DirDefs} )
 endforeach()
 
 set(SOURCES
-    ${PROJECT_SOURCE_DIR}/src/main.cpp
     ${PROJECT_SOURCE_DIR}/src/modulemanager.cpp
-    ${PROJECT_SOURCE_DIR}/src/jsonsessionloader.cpp
-    ${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.cpp
     ${PROJECT_SOURCE_DIR}/src/moduleeventhandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/jsonsessionloader.cpp
+    ${PROJECT_SOURCE_DIR}/src/licensesystem.cpp
     ${PROJECT_SOURCE_DIR}/src/customerdatasystem.cpp
     ${PROJECT_SOURCE_DIR}/src/priorityarbitrationsystem.cpp
     ${PROJECT_SOURCE_DIR}/src/zeradblogger.cpp
-    ${PROJECT_SOURCE_DIR}/src/licensesystem.cpp
-    ${PROJECT_SOURCE_DIR}/src/diriteratorworker.cpp
+    ${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.cpp
+    ${PROJECT_SOURCE_DIR}/src/jsonloggercontentloader.cpp
     ${PROJECT_SOURCE_DIR}/src/modulemanagerconfig.cpp
+    ${PROJECT_SOURCE_DIR}/src/diriteratorworker.cpp
     )
 
-set(HEADER
-    ${PROJECT_SOURCE_DIR}/src/modulemanager.h
-    ${PROJECT_SOURCE_DIR}/src/jsonsessionloader.h
-    ${PROJECT_SOURCE_DIR}/src/modulemanagercontroller.h
-    ${PROJECT_SOURCE_DIR}/src/moduleeventhandler.h
-    ${PROJECT_SOURCE_DIR}/src/customerdatasystem.h
-    ${PROJECT_SOURCE_DIR}/src/modman_util.h
-    ${PROJECT_SOURCE_DIR}/src/priorityarbitrationsystem.h
-    ${PROJECT_SOURCE_DIR}/src/zeradblogger.h
-    ${PROJECT_SOURCE_DIR}/src/licensesystem.h
-    ${PROJECT_SOURCE_DIR}/src/diriteratorworker.h
-    ${PROJECT_SOURCE_DIR}/src/modulemanagerconfig.h
+file(GLOB HEADER
+    ${PROJECT_SOURCE_DIR}/src/*.h
     )
 
 file(GLOB RESOURCES 
     ${PROJECT_SOURCE_DIR}/*.qrc
     )
+
+add_library(zera-modulemanager-lib STATIC
+    ${SOURCES}
+    ${HEADER}
+    )
+
+target_link_libraries(zera-modulemanager-lib
+    PUBLIC
+    Qt5::Core
+    Qt5::Network
+    Qt5::Concurrent
+    VeinMeta::VfEvent
+    VeinMeta::VfComponent
+    VeinMeta::VfStorageHash
+    VeinMeta::VfTcp
+    VeinMeta::VfNet2
+    VeinMeta::VfHelpers
+    VeinMeta::VfQml
+    VeinMeta::VfScript
+    VeinMeta::VfLogger
+    VeinMeta::VfCpp
+    VeinMeta::VfExport
+    VeinMeta::VfFiles
+    VeinMeta::VfCryptoBridge
+    ZeraClasses::MeasurementModuleInterface
+    ZeraClasses::zeraproxy
+    zera-json-params
+    )
+
+add_executable(zera-modulemanager
+    ${PROJECT_SOURCE_DIR}/src/main.cpp
+    ${RESOURCES}
+    )
+
+target_link_libraries(zera-modulemanager
+    PRIVATE
+    zera-modulemanager-lib
+)
 
 file(GLOB SESSION_FILES
     ${PROJECT_SOURCE_DIR}/sessions/*.json
@@ -131,35 +159,6 @@ add_custom_target(zera-modulemanager-config ALL
     COMMAND ${JSONLINT} ${CONFIG_FILES}
     )
 
-add_executable(zera-modulemanager
-    ${SOURCES}
-    ${HEADER}
-    ${RESOURCES}
-    )
-
-target_link_libraries(zera-modulemanager
-    PRIVATE
-    Qt5::Core
-    Qt5::Network
-    Qt5::Concurrent
-    VeinMeta::VfEvent
-    VeinMeta::VfComponent
-    VeinMeta::VfStorageHash
-    VeinMeta::VfTcp
-    VeinMeta::VfNet2
-    VeinMeta::VfHelpers
-    VeinMeta::VfQml
-    VeinMeta::VfScript
-    VeinMeta::VfLogger
-    VeinMeta::VfCpp
-    VeinMeta::VfExport
-    VeinMeta::VfFiles
-    VeinMeta::VfCryptoBridge
-    ZeraClasses::MeasurementModuleInterface
-    ZeraClasses::zeraproxy
-    zera-json-params
-)
-
 target_include_directories(zera-modulemanager
     PUBLIC
     $<BUILD_INTERFACE:${MY_LIBRARY_SOURCE_DIR}/include>
@@ -187,5 +186,8 @@ install(
     FILES ${LOGGER_CONFIG_FILES}
     DESTINATION ${SET_MODMAN_CONTENTSET_PATH}
     )
+
+enable_testing()
+add_subdirectory(tests)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
