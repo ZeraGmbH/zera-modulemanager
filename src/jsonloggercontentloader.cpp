@@ -14,8 +14,13 @@ QStringList JsonLoggerContentLoader::getAvailableContentSets(const QString &sess
 {
     QStringList ret;
     QDir dir;
+    QFile sessionFile;
+
     if(!m_configFileDir.isEmpty() && dir.exists(m_configFileDir)) {
-        ret.append("foo");
+        sessionFile.setFileName(session);
+        if(sessionFile.exists()) {
+            ret.append("foo");
+        }
     }
     return ret;
 }

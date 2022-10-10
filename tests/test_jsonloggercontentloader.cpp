@@ -39,4 +39,11 @@ void test_jsonloggercontentloader::invalidDirSetEmptyEntityComponents()
     QVERIFY(loader.getEntityComponents(validJsonFileName).isEmpty());
 }
 
+void test_jsonloggercontentloader::invalidSessionEmptyAvailableContentSets()
+{
+    JsonLoggerContentLoader loader;
+    loader.setConfigFileDir(CURRENT_SOURCE_DIR);
+    QVERIFY(loader.getAvailableContentSets("foo").isEmpty());
+}
+
 QTEST_MAIN(test_jsonloggercontentloader)
