@@ -147,7 +147,7 @@ if(${JSONLINT} MATCHES ".*echo.*")
     message(WARNING "Program jsonlint-php not found. On Fedora install php-jsonlint")
 endif()
 
-find_program (JSONSCHEMA NAME jsonschema REQUIRED)
+find_program (JSONSCHEMA NAMES jsonschema REQUIRED)
 set(LOGGER_CONFIGS_SCHEMA ${PROJECT_SOURCE_DIR}/logger-configs-schema.json)
 add_custom_target(json-logger-schema ALL
     SOURCES ${LOGGER_CONFIGS_SCHEMA}
