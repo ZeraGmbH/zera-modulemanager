@@ -31,8 +31,10 @@ jobs:
           submodules: recursive
       - name: Build
         run: |
-          echo $HOME
-          echo $GITHUB_WORKSPACE
+          cmake --version
+          ls /usr/bin/*json*
+          echo "HOME: $HOME"
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           cd $HOME
           mkdir -p "$HOME/targetbuild"
           cd "$HOME/targetbuild"
