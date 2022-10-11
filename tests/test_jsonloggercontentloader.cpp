@@ -44,4 +44,17 @@ void test_jsonloggercontentloader::compareSessionLogConfigFileBasenamesEqual()
     QCOMPARE(sessionFileList, loggerFileList);
 }
 
+void test_jsonloggercontentloader::testSimpleContentSets()
+{
+    JsonLoggerContentLoader loader;
+    loader.setConfigFileDir(JSON_TEST_DIR);
+    loader.setSession("simple-valid.json");
+    QStringList cs = loader.getAvailableContentSets();
+    cs.sort();
+    QCOMPARE(cs.size(), 3);
+    QCOMPARE(cs[0], "ZeraActualValues");
+    QCOMPARE(cs[1], "ZeraDCReference");
+    QCOMPARE(cs[2], "ZeraHarmonics");
+}
+
 QTEST_MAIN(test_jsonloggercontentloader)
