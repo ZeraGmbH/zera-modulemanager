@@ -25,7 +25,7 @@ file(GLOB JSON_TEST_FILES
     )
 
 add_custom_target(json-test-files ALL
-    SOURCES ${JSONS}
+    SOURCES ${JSON_TEST_FILES}
     COMMAND ${JSONLINT} ${JSON_TEST_FILES}
     COMMAND ${JSONSCHEMA} -i ${JSON_TEST_FILES} ${LOGGER_CONFIGS_SCHEMA}
     )
