@@ -20,6 +20,17 @@ add_definitions(-DSESSION_FILES="${C_SESSION_FILES}")
 list(JOIN LOGGER_CONFIG_FILES "," C_LOGGER_CONFIG_FILES)
 add_definitions(-DLOGGER_CONFIG_FILES="${C_LOGGER_CONFIG_FILES}")
 
+file(GLOB JSON_TEST_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/json-test-files/*.json
+    )
+
+add_custom_target(json-test-files ALL
+    SOURCES ${JSONS}
+    COMMAND ${JSONLINT} ${JSON_TEST_FILES}
+    COMMAND ${JSONSCHEMA} -i ${JSON_TEST_FILES} ${LOGGER_CONFIGS_SCHEMA}
+    )
+
+add_definitions(-DJSON_TEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/json-test-files")
 
 function(SETUP_TESTS)
     foreach(_testname ${ARGN})
