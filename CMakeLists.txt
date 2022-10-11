@@ -147,6 +147,13 @@ if(${JSONLINT} MATCHES ".*echo.*")
     message(WARNING "Program jsonlint-php not found. On Fedora install php-jsonlint")
 endif()
 
+find_program (JSONSCHEMA NAME jsonschema REQUIRED)
+set(LOGGER_CONFIGS_SCHEMA ${PROJECT_SOURCE_DIR}/logger-configs-schema.json)
+add_custom_target(json-logger-schema ALL
+    SOURCES ${LOGGER_CONFIGS_SCHEMA}
+    COMMAND ${JSONLINT} ${LOGGER_CONFIGS_SCHEMA}
+    )
+
 # targets to see files in qt-creator and check for validity
 add_custom_target(logger-config-files-old ALL
     SOURCES ${LOGGER_CONFIG_FILES_OLD}
