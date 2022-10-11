@@ -25,7 +25,7 @@ QStringList JsonLoggerContentLoader::getAvailableContentSets(const QString &sess
     return ret;
 }
 
-QMap<int, QStringList> JsonLoggerContentLoader::getEntityComponents(const QString &p_contentSetName)
+QMap<int, QStringList> JsonLoggerContentLoader::getEntityComponents(const QString &session, const QString &contentSetName)
 {
     QMap<int, QStringList> ret;
     QDir dir;

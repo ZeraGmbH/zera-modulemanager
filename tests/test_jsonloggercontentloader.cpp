@@ -22,7 +22,7 @@ void test_jsonloggercontentloader::noDirSetEmptyAvailableContentSets()
 void test_jsonloggercontentloader::noDirSetEmptyEntityComponents()
 {
     JsonLoggerContentLoader loader;
-    QVERIFY(loader.getEntityComponents("foo").isEmpty());
+    QVERIFY(loader.getEntityComponents("foo", "bar").isEmpty());
 }
 
 void test_jsonloggercontentloader::invalidDirSetEmptyAvailableContentSets()
@@ -36,7 +36,7 @@ void test_jsonloggercontentloader::invalidDirSetEmptyEntityComponents()
 {
     JsonLoggerContentLoader loader;
     loader.setConfigFileDir(CURRENT_SOURCE_DIR "foo");
-    QVERIFY(loader.getEntityComponents(validJsonFileName).isEmpty());
+    QVERIFY(loader.getEntityComponents(validJsonFileName, "bar").isEmpty());
 }
 
 void test_jsonloggercontentloader::invalidSessionEmptyAvailableContentSets()
