@@ -131,10 +131,13 @@ set(CONFIG_FILES
     ${PROJECT_SOURCE_DIR}/modulemanager_config_dev.json
 )
 
-file(GLOB LOGGER_CONFIG_FILES
-    ${PROJECT_SOURCE_DIR}/loggerconfigs/*.json
+set(LOGGER_CONFIG_FILES_OLD
+    ${PROJECT_SOURCE_DIR}/loggerconfigs/ZeraContext.json
 )
 
+file(GLOB LOGGER_CONFIG_FILES
+    ${PROJECT_SOURCE_DIR}/loggerconfigs/*session*.json
+)
 # Note 1: In OE we do not (yet) have jsonlint-php so it must be optional
 # Note 2: In case we make COMMAND in target below conditional on JSONLINT,
 #         qt-creator does not display source-capabilities. That's what the
@@ -145,6 +148,10 @@ if(${JSONLINT} MATCHES ".*echo.*")
 endif()
 
 # targets to see files in qt-creator and check for validity
+add_custom_target(logger-config-files-old ALL
+    SOURCES ${LOGGER_CONFIG_FILES_OLD}
+    COMMAND ${JSONLINT} ${LOGGER_CONFIG_FILES_OLD}
+    )
 add_custom_target(logger-config-files ALL
     SOURCES ${LOGGER_CONFIG_FILES}
     COMMAND ${JSONLINT} ${LOGGER_CONFIG_FILES}
@@ -183,7 +190,7 @@ install(
     )
 
 install(
-    FILES ${LOGGER_CONFIG_FILES}
+    FILES ${LOGGER_CONFIG_FILES_OLD} ${LOGGER_CONFIG_FILES}
     DESTINATION ${SET_MODMAN_CONTENTSET_PATH}
     )
 

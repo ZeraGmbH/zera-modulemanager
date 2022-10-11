@@ -25,6 +25,14 @@ add_custom_target(json-test-files ALL
 
 add_definitions(-DCURRENT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
+
+list(JOIN SESSION_FILES "," C_SESSION_FILES)
+add_definitions(-DSESSION_FILES="${C_SESSION_FILES}")
+
+list(JOIN LOGGER_CONFIG_FILES "," C_LOGGER_CONFIG_FILES)
+add_definitions(-DLOGGER_CONFIG_FILES="${C_LOGGER_CONFIG_FILES}")
+
+
 function(SETUP_TESTS)
     foreach(_testname ${ARGN})
         add_test(NAME ${_testname}
