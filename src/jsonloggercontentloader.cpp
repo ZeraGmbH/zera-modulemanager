@@ -18,11 +18,7 @@ void JsonLoggerContentLoader::setSession(const QString &session)
 
 QStringList JsonLoggerContentLoader::getAvailableContentSets()
 {
-    QStringList ret;
-    if(!m_currentJsonContentSet.isEmpty()) {
-        ret.append("foo");
-    }
-    return ret;
+    return m_currentJsonContentSet.keys();
 }
 
 QMap<int, QStringList> JsonLoggerContentLoader::getEntityComponents(const QString &p_contentSetName)
