@@ -14,18 +14,6 @@ target_link_libraries(testhelpers
     Qt5::Test
     )
 
-file(GLOB JSONS
-    ${CMAKE_CURRENT_SOURCE_DIR}/*.json
-    )
-
-add_custom_target(json-test-files ALL
-    SOURCES ${JSONS}
-    COMMAND echo ${JSONS}
-    )
-
-add_definitions(-DCURRENT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
-
-
 list(JOIN SESSION_FILES "," C_SESSION_FILES)
 add_definitions(-DSESSION_FILES="${C_SESSION_FILES}")
 

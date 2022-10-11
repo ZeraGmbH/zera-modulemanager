@@ -10,11 +10,7 @@ private slots:
     void init();
     void cleanup();
 
-    void noDirSetEmptyAvailableContentSets();
-    void noDirSetEmptyEntityComponents();
-    void invalidDirSetEmptyAvailableContentSets();
-    void invalidDirSetEmptyEntityComponents();
-    void invalidSessionEmptyAvailableContentSets();
+    void noSessionSetEmptyAvailableContentSets();
 
     void compareSessionLogConfigFileCountEqual();
     void compareSessionLogConfigFileBasenamesEqual();

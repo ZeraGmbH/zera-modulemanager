@@ -3,9 +3,6 @@
 #include <QTest>
 #include <QFileInfo>
 
-static const char *validJsonFileName = "contentset_valid.json";
-static const char *emptyJsonFileName = "contentset_empty.json";
-
 void test_jsonloggercontentloader::init()
 {
 }
@@ -14,38 +11,12 @@ void test_jsonloggercontentloader::cleanup()
 {
 }
 
-void test_jsonloggercontentloader::noDirSetEmptyAvailableContentSets()
+void test_jsonloggercontentloader::noSessionSetEmptyAvailableContentSets()
 {
     JsonLoggerContentLoader loader;
-    QVERIFY(loader.getAvailableContentSets("foo").isEmpty());
+    QVERIFY(loader.getAvailableContentSets().isEmpty());
 }
 
-void test_jsonloggercontentloader::noDirSetEmptyEntityComponents()
-{
-    JsonLoggerContentLoader loader;
-    QVERIFY(loader.getEntityComponents("foo").isEmpty());
-}
-
-void test_jsonloggercontentloader::invalidDirSetEmptyAvailableContentSets()
-{
-    JsonLoggerContentLoader loader;
-    loader.setConfigFileDir(CURRENT_SOURCE_DIR "foo");
-    QVERIFY(loader.getAvailableContentSets(validJsonFileName).isEmpty());
-}
-
-void test_jsonloggercontentloader::invalidDirSetEmptyEntityComponents()
-{
-    JsonLoggerContentLoader loader;
-    loader.setConfigFileDir(CURRENT_SOURCE_DIR "foo");
-    QVERIFY(loader.getEntityComponents(validJsonFileName).isEmpty());
-}
-
-void test_jsonloggercontentloader::invalidSessionEmptyAvailableContentSets()
-{
-    JsonLoggerContentLoader loader;
-    loader.setConfigFileDir(CURRENT_SOURCE_DIR);
-    QVERIFY(loader.getAvailableContentSets("foo").isEmpty());
-}
 
 void test_jsonloggercontentloader::compareSessionLogConfigFileCountEqual()
 {
