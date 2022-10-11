@@ -2,8 +2,11 @@
 #include "jsonloggercontentloader.h"
 #include <QTest>
 
-static const char *validJsonFileName = "contentset_valid.json";
-static const char *emptyJsonFileName = "contentset_empty.json";
+static const char *validContentSetJsonFile = "contentset_valid.json";
+static const char *undefinedContentSetJsonFile = "contentset_undefined.json";
+static const char *emptyContentSetJsonFile = "contentset_empty.json";
+
+static const char *validContentSetName = "ZeraActualValues";
 
 void test_jsonloggercontentloader::init()
 {
@@ -29,14 +32,14 @@ void test_jsonloggercontentloader::invalidDirSetEmptyAvailableContentSets()
 {
     JsonLoggerContentLoader loader;
     loader.setConfigFileDir(CURRENT_SOURCE_DIR "foo");
-    QVERIFY(loader.getAvailableContentSets(validJsonFileName).isEmpty());
+    QVERIFY(loader.getAvailableContentSets(validContentSetJsonFile).isEmpty());
 }
 
 void test_jsonloggercontentloader::invalidDirSetEmptyEntityComponents()
 {
     JsonLoggerContentLoader loader;
     loader.setConfigFileDir(CURRENT_SOURCE_DIR "foo");
-    QVERIFY(loader.getEntityComponents(validJsonFileName, "bar").isEmpty());
+    QVERIFY(loader.getEntityComponents(validContentSetJsonFile, validContentSetName).isEmpty());
 }
 
 void test_jsonloggercontentloader::invalidSessionEmptyAvailableContentSets()
@@ -45,5 +48,6 @@ void test_jsonloggercontentloader::invalidSessionEmptyAvailableContentSets()
     loader.setConfigFileDir(CURRENT_SOURCE_DIR);
     QVERIFY(loader.getAvailableContentSets("foo").isEmpty());
 }
+
 
 QTEST_MAIN(test_jsonloggercontentloader)

@@ -1,0 +1,46 @@
+{
+    "ContentSet": {
+        "ZeraActualValues": [
+            {
+                "EntityId": "1040",
+                "Comment": "RMSModule"
+            },
+            {
+                "EntityId": "1050",
+                "Comment": "DFTModule"
+            },
+            {
+                "EntityId": "1110",
+                "Comment": "THDNModule"
+            },
+            {
+                "EntityId": "1111",
+                "Comment": "THDNModule"
+            },
+            {
+                "EntityId": "1070",
+                "Comment": "PowerModule"
+            },
+            {
+                "EntityId": "1071",
+                "Comment": "PowerModule"
+            },
+            {
+                "EntityId": "1072",
+                "Comment": "PowerModule"
+            },
+            {
+                "EntityId": "1090",
+                "Comment": "PowerModule CED"
+            },
+            {
+                "EntityId": "1020",
+                "Comment": "RangeModule"
+            },
+            {
+                "EntityId": "1140",
+                "Comment": "LambdaModule"
+            }
+        ]
+    }
+}
