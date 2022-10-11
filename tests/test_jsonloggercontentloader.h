@@ -15,6 +15,8 @@ private slots:
     void invalidDirSetEmptyAvailableContentSets();
     void invalidDirSetEmptyEntityComponents();
     void invalidSessionEmptyAvailableContentSets();
+
+    void compareSessionLogConfigFileCountEqual();
 };
 
 #endif // TEST_JSONLOGGERCONTENTLOADER_H

@@ -46,4 +46,11 @@ void test_jsonloggercontentloader::invalidSessionEmptyAvailableContentSets()
     QVERIFY(loader.getAvailableContentSets("foo").isEmpty());
 }
 
+void test_jsonloggercontentloader::compareSessionLogConfigFileCountEqual()
+{
+    QStringList sessionFileList = QString(SESSION_FILES).split(",");
+    QStringList loggerFileList = QString(LOGGER_CONFIG_FILES).split(",");
+    QCOMPARE(sessionFileList.count(), loggerFileList.count());
+}
+
 QTEST_MAIN(test_jsonloggercontentloader)
