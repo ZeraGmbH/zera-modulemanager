@@ -56,6 +56,19 @@ void test_jsonloggercontentloader::invalidSessionEmptyEntityComponents()
     QVERIFY(loader.getEntityComponents("foo", "bar").isEmpty());
 }
 
+void test_jsonloggercontentloader::UndefinedContentSetEmptyAvailableContentSets()
+{
+    JsonLoggerContentLoader loader;
+    loader.setConfigFileDir(CURRENT_SOURCE_DIR);
+    QVERIFY(loader.getAvailableContentSets(undefinedContentSetJsonFile).isEmpty());
+}
+
+void test_jsonloggercontentloader::EmptyContentSetsEmptyAvailableContentSets()
+{
+     JsonLoggerContentLoader loader;
+     loader.setConfigFileDir(CURRENT_SOURCE_DIR);
+     QVERIFY(loader.getAvailableContentSets(emptyContentSetJsonFile).isEmpty());
+}
 
 
 QTEST_MAIN(test_jsonloggercontentloader)
