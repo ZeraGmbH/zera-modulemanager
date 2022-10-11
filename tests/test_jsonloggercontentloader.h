@@ -17,6 +17,7 @@ private slots:
     void invalidSessionEmptyAvailableContentSets();
 
     void compareSessionLogConfigFileCountEqual();
+    void compareSessionLogConfigFileBasenamesEqual();
 };
 
 #endif // TEST_JSONLOGGERCONTENTLOADER_H
