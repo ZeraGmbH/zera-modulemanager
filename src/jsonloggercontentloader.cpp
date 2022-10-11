@@ -29,8 +29,13 @@ QMap<int, QStringList> JsonLoggerContentLoader::getEntityComponents(const QStrin
 {
     QMap<int, QStringList> ret;
     QDir dir;
+    QFile sessionFile;
+
     if(!m_configFileDir.isEmpty() && dir.exists(m_configFileDir)) {
-        ret.insert(0, QStringList() << "foo");
+        sessionFile.setFileName(session);
+        if(sessionFile.exists()) {
+            ret.insert(0, QStringList() << "foo");
+        }
     }
     return ret;
 }
