@@ -1,5 +1,7 @@
 #include "jsonloggercontentloader.h"
 #include <QDir>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 JsonLoggerContentLoader::JsonLoggerContentLoader()
 {
@@ -17,9 +19,26 @@ QStringList JsonLoggerContentLoader::getAvailableContentSets(const QString &sess
     QFile sessionFile;
 
     if(!m_configFileDir.isEmpty() && dir.exists(m_configFileDir)) {
+        dir.setCurrent(m_configFileDir);
         sessionFile.setFileName(session);
         if(sessionFile.exists()) {
-            ret.append("foo");
+            sessionFile.open(QIODevice::ReadOnly);
+            QByteArray fileContent = sessionFile.readAll();
+            QJsonParseError err;
+            QJsonDocument doc = QJsonDocument::fromJson(fileContent, &err);
+            if(err.error == QJsonParseError::NoError){
+                if(doc.isObject()){
+                    QJsonObject rootObj = doc.object();
+                    QJsonObject contentSetList = rootObj.value("ContentSet").toObject();
+                    if(contentSetList.isEmpty()) {
+                    }
+                    else {
+                        ret = contentSetList.keys();
+                    }
+
+                }
+            }
+
         }
     }
     return ret;

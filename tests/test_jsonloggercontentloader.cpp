@@ -70,5 +70,11 @@ void test_jsonloggercontentloader::EmptyContentSetsEmptyAvailableContentSets()
      QVERIFY(loader.getAvailableContentSets(emptyContentSetJsonFile).isEmpty());
 }
 
+void test_jsonloggercontentloader::validContentSetsValidAvailableContentSets()
+{
+    JsonLoggerContentLoader loader;
+    loader.setConfigFileDir(CURRENT_SOURCE_DIR);
+    QCOMPARE(loader.getAvailableContentSets(validContentSetJsonFile), QStringList(validContentSetName));
+}
 
 QTEST_MAIN(test_jsonloggercontentloader)
