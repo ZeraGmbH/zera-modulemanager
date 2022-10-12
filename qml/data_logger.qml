@@ -14,7 +14,7 @@ VeinLogger {
     readonly property string sysSession: systemEntity.Session
     onSysSessionChanged: {
         session = systemEntity.Session;
-        loggerEntity.availableContentSets = readSession();
+        loggerEntity.availableContentSets = getAvailableContentSets();
     }
 
     readonly property var sysContentSets: loggerEntity.currentContentSets;
