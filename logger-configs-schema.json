@@ -28,6 +28,17 @@
             "minItems": 1
         }
     },
+    "anyOf": [
+        {"required": ["ZeraActualValues"]},
+        {"required": ["ZeraHarmonics"]},
+        {"required": ["ZeraCurves"]},
+        {"required": ["ZeraComparison"]},
+        {"required": ["ZeraBurden"]},
+        {"required": ["ZeraTransformer"]},
+        {"required": ["ZeraDCReference"]},
+        {"required": ["ZeraQuartzReference"]},
+        {"required": ["ZeraAll"]}
+    ],
     "properties": {
         "ZeraActualValues": { "$ref": "#/$defs/loggerarray" },
         "ZeraHarmonics": { "$ref": "#/$defs/loggerarray" },
