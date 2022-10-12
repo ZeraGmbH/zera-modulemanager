@@ -131,10 +131,6 @@ set(CONFIG_FILES
     ${PROJECT_SOURCE_DIR}/modulemanager_config_dev.json
 )
 
-set(LOGGER_CONFIG_FILES_OLD
-    ${PROJECT_SOURCE_DIR}/loggerconfigs/ZeraContext.json
-)
-
 file(GLOB LOGGER_CONFIG_FILES
     ${PROJECT_SOURCE_DIR}/loggerconfigs/*session*.json
 )
@@ -148,16 +144,12 @@ if(${JSONLINT} MATCHES ".*echo.*")
 endif()
 
 find_program (JSONSCHEMA NAMES jsonschema REQUIRED)
+
+# targets to see files in qt-creator and check for validity
 set(LOGGER_CONFIGS_SCHEMA ${PROJECT_SOURCE_DIR}/logger-configs-schema.json)
 add_custom_target(json-logger-schema ALL
     SOURCES ${LOGGER_CONFIGS_SCHEMA}
     COMMAND ${JSONLINT} ${LOGGER_CONFIGS_SCHEMA}
-    )
-
-# targets to see files in qt-creator and check for validity
-add_custom_target(logger-config-files-old ALL
-    SOURCES ${LOGGER_CONFIG_FILES_OLD}
-    COMMAND ${JSONLINT} ${LOGGER_CONFIG_FILES_OLD}
     )
 
 set(LOGGER_CONFIG_SCHEMA_CMDS)
@@ -173,10 +165,11 @@ add_custom_target(logger-config-files ALL
     ${LOGGER_CONFIG_SCHEMA_CMDS}
     )
 
-add_custom_target(zera-modulemanager-session-files ALL
+add_custom_target(session-files ALL
     SOURCES ${SESSION_FILES}
     COMMAND ${JSONLINT} ${SESSION_FILES}
     )
+
 add_custom_target(zera-modulemanager-config ALL
     SOURCES ${CONFIG_FILES}
     COMMAND ${JSONLINT} ${CONFIG_FILES}
@@ -203,11 +196,6 @@ install(
 install(
     FILES ${CONFIG_FILES}
     DESTINATION ${SET_MODMAN_CONFIG_PATH}
-    )
-
-install(
-    FILES ${LOGGER_CONFIG_FILES_OLD} ${LOGGER_CONFIG_FILES}
-    DESTINATION ${SET_MODMAN_CONTENTSET_PATH}
     )
 
 enable_testing()

@@ -107,7 +107,6 @@ int main(int argc, char *argv[])
     //setup logger
     VeinApiQml::VeinQml::setStaticInstance(qmlSystem);
     VeinLogger::QmlLogger::setStaticLogger(dataLoggerSystem);
-    VeinLogger::QmlLogger::setContentSetPaths(QString(MODMAN_CONTENTSET_PATH).append("ZeraContext.json"),QString(MODMAN_CUST_CONTENTSET_PATH).append("CustomerContext.json"));
     VeinLogger::QmlLogger::setJsonEnvironment(MODMAN_CONTENTSET_PATH, std::make_shared<JsonLoggerContentLoader>());
 
     ZeraModules::ModuleManager *modMan = new ZeraModules::ModuleManager(availableSessionList, &a);
