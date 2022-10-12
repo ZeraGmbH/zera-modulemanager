@@ -73,10 +73,8 @@ void test_jsonloggercontentloader::testSimpleEntityComponentsActual()
     loader.setSession("simple-valid.json");
     QMap<int, QStringList> entityComponentMap = loader.getEntityComponents("ZeraActualValues");
     QCOMPARE(entityComponentMap.count(), 2);
-    QCOMPARE(entityComponentMap[1040].count(), 1);
-    QCOMPARE(entityComponentMap[1040][0], "");
-    QCOMPARE(entityComponentMap[1050].count(), 1);
-    QCOMPARE(entityComponentMap[1050][0], "");
+    QCOMPARE(entityComponentMap[1040].count(), 0);
+    QCOMPARE(entityComponentMap[1050].count(), 0);
 }
 
 void test_jsonloggercontentloader::testSimpleEntityComponentsHarmonics()
@@ -86,10 +84,8 @@ void test_jsonloggercontentloader::testSimpleEntityComponentsHarmonics()
     loader.setSession("simple-valid.json");
     QMap<int, QStringList> entityComponentMap = loader.getEntityComponents("ZeraHarmonics");
     QCOMPARE(entityComponentMap.count(), 2);
-    QCOMPARE(entityComponentMap[1110].count(), 1);
-    QCOMPARE(entityComponentMap[1110][0], "");
-    QCOMPARE(entityComponentMap[1060].count(), 1);
-    QCOMPARE(entityComponentMap[1060][0], "");
+    QCOMPARE(entityComponentMap[1110].count(), 0);
+    QCOMPARE(entityComponentMap[1060].count(), 0);
 }
 
 void test_jsonloggercontentloader::testSimpleEntityComponentsDcRef()
