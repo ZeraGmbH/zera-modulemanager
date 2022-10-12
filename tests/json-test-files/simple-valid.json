@@ -1,27 +1,27 @@
 {
     "ZeraActualValues": [
         {
-            "EntityId": "1040",
+            "EntityId": 1040,
             "Comment": "RMSModule"
         },
         {
-            "EntityId": "1050",
+            "EntityId": 1050,
             "Comment": "DFTModule"
         }
     ],
     "ZeraHarmonics" : [
         {
-            "EntityId": "1110",
+            "EntityId": 1110,
             "Comment": "THDNModule"
         },
         {
-            "EntityId": "1060",
+            "EntityId": 1060,
             "Comment": "FFTModule"
         }
     ],
     "ZeraDCReference": [
         {
-            "EntityId": "1050",
+            "EntityId": 1050,
             "Comment": "DFTModule",
             "Components": [
                 "ACT_DFTPN1",
