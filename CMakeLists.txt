@@ -159,9 +159,18 @@ add_custom_target(logger-config-files-old ALL
     SOURCES ${LOGGER_CONFIG_FILES_OLD}
     COMMAND ${JSONLINT} ${LOGGER_CONFIG_FILES_OLD}
     )
+
+set(LOGGER_CONFIG_SCHEMA_CMDS)
+foreach(config ${LOGGER_CONFIG_FILES})
+  list(APPEND LOGGER_CONFIG_SCHEMA_CMDS
+      COMMAND ${JSONSCHEMA} -i ${config} ${LOGGER_CONFIGS_SCHEMA} || (echo \"Error: Schema validation failed in '${config}'\" 1>&2$<SEMICOLON> exit 1)
+    )
+endforeach()
+
 add_custom_target(logger-config-files ALL
     SOURCES ${LOGGER_CONFIG_FILES}
     COMMAND ${JSONLINT} ${LOGGER_CONFIG_FILES}
+    ${LOGGER_CONFIG_SCHEMA_CMDS}
     )
 
 add_custom_target(zera-modulemanager-session-files ALL
