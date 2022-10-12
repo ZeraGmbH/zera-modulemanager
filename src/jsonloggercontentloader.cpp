@@ -30,14 +30,8 @@ QMap<int, QStringList> JsonLoggerContentLoader::getEntityComponents(const QStrin
         int entityId = arrEntry["EntityId"].toInt();
         QStringList componentList;
         const QJsonArray arrComponents = arrEntry["Components"].toArray();
-        if(arrComponents.isEmpty()) {
-            // mark all components by one empty string
-            componentList.append("");
-        }
-        else {
-            for(const auto &component : arrComponents) {
-                componentList.append(component.toString());
-            }
+        for(const auto &component : arrComponents) {
+            componentList.append(component.toString());
         }
         ret.insert(entityId, componentList);
     }
