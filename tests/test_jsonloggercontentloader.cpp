@@ -44,7 +44,7 @@ void test_jsonloggercontentloader::compareSessionLogConfigFileBasenamesEqual()
     QCOMPARE(sessionFileList, loggerFileList);
 }
 
-void test_jsonloggercontentloader::testSimpleContentSets()
+void test_jsonloggercontentloader::testSimpleAvailContentSets()
 {
     JsonLoggerContentLoader loader;
     loader.setConfigFileDir(JSON_TEST_DIR);
@@ -56,5 +56,56 @@ void test_jsonloggercontentloader::testSimpleContentSets()
     QCOMPARE(cs[1], "ZeraDCReference");
     QCOMPARE(cs[2], "ZeraHarmonics");
 }
+
+void test_jsonloggercontentloader::testSimpleEntityComponentsNoMatch()
+{
+    JsonLoggerContentLoader loader;
+    loader.setConfigFileDir(JSON_TEST_DIR);
+    loader.setSession("simple-valid.json");
+    QMap<int, QStringList> entityComponentMap = loader.getEntityComponents("foo");
+    QVERIFY(entityComponentMap.isEmpty());
+}
+
+void test_jsonloggercontentloader::testSimpleEntityComponentsActual()
+{
+    JsonLoggerContentLoader loader;
+    loader.setConfigFileDir(JSON_TEST_DIR);
+    loader.setSession("simple-valid.json");
+    QMap<int, QStringList> entityComponentMap = loader.getEntityComponents("ZeraActualValues");
+    QCOMPARE(entityComponentMap.count(), 2);
+    QCOMPARE(entityComponentMap[1040].count(), 1);
+    QCOMPARE(entityComponentMap[1040][0], "");
+    QCOMPARE(entityComponentMap[1050].count(), 1);
+    QCOMPARE(entityComponentMap[1050][0], "");
+}
+
+void test_jsonloggercontentloader::testSimpleEntityComponentsHarmonics()
+{
+    JsonLoggerContentLoader loader;
+    loader.setConfigFileDir(JSON_TEST_DIR);
+    loader.setSession("simple-valid.json");
+    QMap<int, QStringList> entityComponentMap = loader.getEntityComponents("ZeraHarmonics");
+    QCOMPARE(entityComponentMap.count(), 2);
+    QCOMPARE(entityComponentMap[1110].count(), 1);
+    QCOMPARE(entityComponentMap[1110][0], "");
+    QCOMPARE(entityComponentMap[1060].count(), 1);
+    QCOMPARE(entityComponentMap[1060][0], "");
+}
+
+void test_jsonloggercontentloader::testSimpleEntityComponentsDcRef()
+{
+    JsonLoggerContentLoader loader;
+    loader.setConfigFileDir(JSON_TEST_DIR);
+    loader.setSession("simple-valid.json");
+    QMap<int, QStringList> entityComponentMap = loader.getEntityComponents("ZeraDCReference");
+    QCOMPARE(entityComponentMap.count(), 1);
+    QCOMPARE(entityComponentMap[1050].count(), 3);
+    QStringList components = entityComponentMap[1050];
+    components.sort();
+    QCOMPARE(components[0], "ACT_DFTPN1");
+    QCOMPARE(components[1], "ACT_DFTPN2");
+    QCOMPARE(components[2], "ACT_DFTPN3");
+}
+
 
 QTEST_MAIN(test_jsonloggercontentloader)

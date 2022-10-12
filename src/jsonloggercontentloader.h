@@ -12,7 +12,7 @@ public:
     void setConfigFileDir(const QString &dir) override;
     void setSession(const QString &session) override;
     QStringList getAvailableContentSets() override;
-    QMap<int, QStringList> getEntityComponents(const QString &p_contentSetName) override;
+    QMap<int, QStringList> getEntityComponents(const QString &contentSetName) override;
 private:
     QString m_configFileDir;
     QJsonObject m_currentJsonContentSet;
