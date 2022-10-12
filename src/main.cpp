@@ -7,6 +7,7 @@
 #include "priorityarbitrationsystem.h"
 #include "zeradblogger.h"
 #include "licensesystem.h"
+#include "jsonloggercontentloader.h"
 
 #include <QCoreApplication>
 
@@ -39,10 +40,6 @@
 
 #include <QRegExp>
 
-/**
- * @brief main
- * @todo remove  VeinLogger::QmlLogger::setContentSetPaths, when handling is moved to vl_databaselogger.
- */
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -110,9 +107,8 @@ int main(int argc, char *argv[])
     //setup logger
     VeinApiQml::VeinQml::setStaticInstance(qmlSystem);
     VeinLogger::QmlLogger::setStaticLogger(dataLoggerSystem);
-
-    // set zera and customer contentSet path. Defined in CMakeLists.txt.
     VeinLogger::QmlLogger::setContentSetPaths(QString(MODMAN_CONTENTSET_PATH).append("ZeraContext.json"),QString(MODMAN_CUST_CONTENTSET_PATH).append("CustomerContext.json"));
+    VeinLogger::QmlLogger::setJsonEnvironment(MODMAN_CONTENTSET_PATH, std::make_shared<JsonLoggerContentLoader>());
 
     ZeraModules::ModuleManager *modMan = new ZeraModules::ModuleManager(availableSessionList, &a);
     JsonSessionLoader *sessionLoader = new JsonSessionLoader(&a);
