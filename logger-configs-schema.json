@@ -7,7 +7,7 @@
             "required": [ "EntityId" ],
             "properties": {
                 "EntityId": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "Comment": {
                     "type": "string"
