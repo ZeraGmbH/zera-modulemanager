@@ -12,9 +12,6 @@ private slots:
 
     void noSessionSetEmptyAvailableContentSets();
 
-    void compareSessionLogConfigFileCountEqual();
-    void compareSessionLogConfigFileBasenamesEqual();
-
     void testSimpleAvailContentSets();
     void testSimpleEntityComponentsNoMatch();
     void testSimpleEntityComponentsActual();
