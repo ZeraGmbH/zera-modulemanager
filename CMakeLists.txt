@@ -143,11 +143,13 @@ endif()
 
 find_program (JSONSCHEMA NAMES jsonschema REQUIRED)
 
+set(LOGGER_CONFIGS_SCHEMA ${PROJECT_SOURCE_DIR}/json-schemas/logger-configs-schema.json)
+set(SESSION_SCHEMA ${PROJECT_SOURCE_DIR}/json-schemas/session-schema.json)
+
 # targets to see files in qt-creator and check for validity
-set(LOGGER_CONFIGS_SCHEMA ${PROJECT_SOURCE_DIR}/logger-configs-schema.json)
-add_custom_target(json-logger-schema ALL
-    SOURCES ${LOGGER_CONFIGS_SCHEMA}
-    COMMAND ${JSONLINT} ${LOGGER_CONFIGS_SCHEMA}
+add_custom_target(json-schemas ALL
+    SOURCES ${LOGGER_CONFIGS_SCHEMA} ${SESSION_SCHEMA}
+    COMMAND ${JSONLINT} ${LOGGER_CONFIGS_SCHEMA} ${SESSION_SCHEMA}
     )
 
 set(LOGGER_CONFIG_SCHEMA_CMDS)
@@ -163,9 +165,17 @@ add_custom_target(logger-config-files ALL
     ${LOGGER_CONFIG_SCHEMA_CMDS}
     )
 
+set(SESSION_SCHEMA_CMDS)
+foreach(config ${SESSION_FILES})
+  list(APPEND SESSION_SCHEMA_CMDS
+      COMMAND ${JSONSCHEMA} -i ${config} ${SESSION_SCHEMA} || (echo \"Error: Schema validation failed in '${config}'\" 1>&2$<SEMICOLON> exit 1)
+    )
+endforeach()
+
 add_custom_target(session-files ALL
     SOURCES ${SESSION_FILES}
     COMMAND ${JSONLINT} ${SESSION_FILES}
+    #${SESSION_SCHEMA_CMDS}
     )
 
 add_custom_target(zera-modulemanager-config ALL

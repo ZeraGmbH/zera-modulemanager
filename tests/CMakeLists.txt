@@ -20,14 +20,24 @@ add_definitions(-DSESSION_FILES="${C_SESSION_FILES}")
 list(JOIN LOGGER_CONFIG_FILES "," C_LOGGER_CONFIG_FILES)
 add_definitions(-DLOGGER_CONFIG_FILES="${C_LOGGER_CONFIG_FILES}")
 
-file(GLOB JSON_TEST_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/json-test-files/*.json
+set(JSON_CONFIG_LOADER_TEST_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/json-test-files/simple-valid.json
     )
 
-add_custom_target(json-test-files ALL
-    SOURCES ${JSON_TEST_FILES}
-    COMMAND ${JSONLINT} ${JSON_TEST_FILES}
-    COMMAND ${JSONSCHEMA} -i ${JSON_TEST_FILES} ${LOGGER_CONFIGS_SCHEMA}
+add_custom_target(json-test-logger ALL
+    SOURCES ${JSON_CONFIG_LOADER_TEST_FILES}
+    COMMAND ${JSONLINT} ${JSON_CONFIG_LOADER_TEST_FILES}
+    COMMAND ${JSONSCHEMA} -i ${JSON_CONFIG_LOADER_TEST_FILES} ${LOGGER_CONFIGS_SCHEMA} || (echo \"Error: Schema validation failed in '${JSON_CONFIG_LOADER_TEST_FILES}'\" 1>&2$<SEMICOLON> exit 1)
+    )
+
+set(JSON_SESSION_TEST_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/json-test-files/simple-valid-session.json
+    )
+
+add_custom_target(json-test-session ALL
+    SOURCES ${JSON_SESSION_TEST_FILES}
+    COMMAND ${JSONLINT} ${JSON_SESSION_TEST_FILES}
+    COMMAND ${JSONSCHEMA} -i ${JSON_SESSION_TEST_FILES} ${SESSION_SCHEMA} || (echo \"Error: Schema validation failed in '${JSON_SESSION_TEST_FILES}'\" 1>&2$<SEMICOLON> exit 1)
     )
 
 add_definitions(-DJSON_TEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/json-test-files")
