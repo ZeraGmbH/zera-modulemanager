@@ -67,4 +67,5 @@ endfunction()
 SETUP_TESTS(
     test_jsonloggercontentloader
     test_jsonconfigfiles
+    test_loggercontentsessionloader
     )

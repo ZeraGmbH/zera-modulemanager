@@ -72,6 +72,7 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/src/jsonloggercontentloader.cpp
     ${PROJECT_SOURCE_DIR}/src/modulemanagerconfig.cpp
     ${PROJECT_SOURCE_DIR}/src/diriteratorworker.cpp
+    ${PROJECT_SOURCE_DIR}/src/jsonloggercontentsessionloader.cpp
     )
 
 file(GLOB HEADER
