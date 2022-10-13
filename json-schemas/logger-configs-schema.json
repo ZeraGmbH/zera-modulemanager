@@ -37,8 +37,7 @@
         {"required": ["ZeraTransformer"]},
         {"required": ["ZeraDCReference"]},
         {"required": ["ZeraQuartzReference"]},
-        {"required": ["ZeraSourceControl"]},
-        {"required": ["ZeraAll"]}
+        {"required": ["ZeraSourceControl"]}
     ],
     "properties": {
         "ZeraActualValues": { "$ref": "#/$defs/loggerarray" },
@@ -49,8 +48,7 @@
         "ZeraTransformer": { "$ref": "#/$defs/loggerarray" },
         "ZeraDCReference": { "$ref": "#/$defs/loggerarray" },
         "ZeraQuartzReference": { "$ref": "#/$defs/loggerarray" },
-        "ZeraSourceControl": { "$ref": "#/$defs/loggerarray" },
-        "ZeraAll": { "$ref": "#/$defs/loggerarray" }
+        "ZeraSourceControl": { "$ref": "#/$defs/loggerarray" }
     },
     "additionalProperties": false
 }

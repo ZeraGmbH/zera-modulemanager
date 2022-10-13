@@ -20,15 +20,5 @@
                 "PAR_RefChannel"
             ]
         }
-    ],
-    "ZeraAll": [
-        {
-            "EntityId": 1300,
-            "Comment": "SourceModule"
-        },
-        {
-            "EntityId": 1020,
-            "Comment": "RangeModule"
-        }
     ]
 }
