@@ -8,6 +8,7 @@
 #include "zeradblogger.h"
 #include "licensesystem.h"
 #include "jsonloggercontentloader.h"
+#include "jsonloggercontentsessionloader.h"
 
 #include <QCoreApplication>
 
@@ -108,6 +109,7 @@ int main(int argc, char *argv[])
     VeinApiQml::VeinQml::setStaticInstance(qmlSystem);
     VeinLogger::QmlLogger::setStaticLogger(dataLoggerSystem);
     VeinLogger::QmlLogger::setJsonEnvironment(MODMAN_CONTENTSET_PATH, std::make_shared<JsonLoggerContentLoader>());
+    VeinLogger::QmlLogger::setJsonEnvironment(MODMAN_SESSION_PATH, std::make_shared<JsonLoggerContentSessionLoader>());
 
     ZeraModules::ModuleManager *modMan = new ZeraModules::ModuleManager(availableSessionList, &a);
     JsonSessionLoader *sessionLoader = new JsonSessionLoader(&a);
