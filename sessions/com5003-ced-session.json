@@ -86,6 +86,11 @@
         "id": 1140
       },
       {
+        "name" : "sourcemodule",
+        "configFile" : "demo-sourcemodule.xml",
+        "id": 1300
+      },
+      {
         "name" : "scpimodule",
         "configFile" : "com5003-scpimodule.xml",
         "id": 9999
