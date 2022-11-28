@@ -57,6 +57,7 @@ ModuleManager::ModuleManager(const QStringList &t_sessionList, QObject *t_parent
     m_proxyInstance(Zera::Proxy::cProxy::getInstance()),
     m_moduleStartLock(false)
 {
+    m_timerAllModulesLoaded.start();
     QStringList entryList = QDir(MODMAN_SESSION_PATH).entryList(QStringList({"*.json"}));
     QSet<QString> fileSet(entryList.begin(), entryList.end());
     QSet<QString> expectedSet(t_sessionList.begin(), t_sessionList.end());
@@ -309,7 +310,7 @@ void ModuleManager::onModuleStartNext()
     else {
         ModulemanagerConfig *mmConfig = ModulemanagerConfig::getInstance();
         mmConfig->setDefaultSession(m_sessionPath);
-        qInfo("All modules loaded");
+        qInfo("All modules loaded after %llims", m_timerAllModulesLoaded.elapsed());
         emit sigModulesLoaded(m_sessionPath, m_sessionsAvailable);
     }
 }
