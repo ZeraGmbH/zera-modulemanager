@@ -1,12 +1,12 @@
 #ifndef MODULELOADER_H
 #define MODULELOADER_H
 
-#include <QObject>
 #include <virtualmodule.h>
 #include <QVariant>
 #include <QHash>
 #include <QQueue>
 #include <QTimer>
+#include <QElapsedTimer>
 
 
 namespace Zera
@@ -160,6 +160,7 @@ private:
     QList<QString> m_sessionsAvailable;
 
     bool m_moduleStartLock;
+    QElapsedTimer m_timerAllModulesLoaded;
 };
 }
 
