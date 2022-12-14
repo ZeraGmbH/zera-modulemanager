@@ -103,7 +103,11 @@ int main(int argc, char *argv[])
     CustomerDataSystem *customerDataSystem = nullptr;
     LicenseSystem *licenseSystem = new LicenseSystem({QUrl("file:///home/operator/license-keys")}, &a);
     vfExport::vf_export *exportModule=new vfExport::vf_export();
-    vfFiles::vf_files *filesModule = new vfFiles::vf_files();
+
+    QStringList allowedFolders{QStringLiteral(MODMAN_CUSTOMERDATA_PATH),
+                               QStringLiteral(MODMAN_LOGGER_LOCAL_PATH)};
+    FileAccessControlPtr fileAccessController = std::make_shared<FileAccessControl>(allowedFolders);
+    vfFiles::vf_files *filesModule = new vfFiles::vf_files(fileAccessController);
 
     //setup logger
     VeinApiQml::VeinQml::setStaticInstance(qmlSystem);
