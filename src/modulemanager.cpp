@@ -153,6 +153,7 @@ void ModuleManager::startModule(const QString & t_uniqueModuleName, const QStrin
     // do not allow starting until all modules are shut down
     if(m_moduleStartLock == false)
     {
+        qInfo("Starting module %s...", qPrintable(t_uniqueModuleName));
         MeasurementModuleFactory *tmpFactory=nullptr;
 
         tmpFactory=m_factoryTable.value(t_uniqueModuleName);
@@ -195,11 +196,13 @@ void ModuleManager::startModule(const QString & t_uniqueModuleName, const QStrin
         }
         else //wait for serial number initialization
         {
+            qInfo("No serialno - enqueue module %s...", qPrintable(t_uniqueModuleName));
             m_deferredStartList.enqueue(new ModuleData(nullptr, t_uniqueModuleName, t_xmlConfigPath, t_xmlConfigData, t_moduleId));
         }
     }
     else
     {
+        qInfo("Locked - enqueue module %s...", qPrintable(t_uniqueModuleName));
         m_deferredStartList.enqueue(new ModuleData(nullptr, t_uniqueModuleName, t_xmlConfigPath, t_xmlConfigData, t_moduleId));
     }
 }
@@ -303,7 +306,6 @@ void ModuleManager::onModuleStartNext()
     m_moduleStartLock = false;
     if(m_deferredStartList.length() > 0) {
         ModuleData *tmpData = m_deferredStartList.dequeue();
-        qInfo("Loading module %s...", qPrintable(tmpData->m_uniqueName));
         startModule(tmpData->m_uniqueName, tmpData->m_configPath, tmpData->m_configData, tmpData->m_moduleId);
         delete tmpData;
     }

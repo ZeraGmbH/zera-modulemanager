@@ -156,8 +156,29 @@ int main(int argc, char *argv[])
     subSystems.append(scriptSystem);
     subSystems.append(licenseSystem);
 
-
     evHandler->setSubsystems(subSystems);
+    // files entity
+    qInfo("Starting vf-files...");
+    evHandler->addSubsystem(filesModule->getVeinEntity());
+    filesModule->initOnce();
+    filesModule->addMountToWatch(
+                QStringLiteral("AutoMountedPaths"),
+                QStringLiteral(MODMAN_AUTOMOUNT_PATH));
+    filesModule->addDirToWatch(
+                QStringLiteral("AvailableCustomerData"),
+                QStringLiteral(MODMAN_CUSTOMERDATA_PATH),
+                QStringList({"*.json", "*/*.json"}),
+                QDir::NoDotAndDotDot | QDir::Files,
+                false);
+    filesModule->addDefaultPathComponent(
+                QStringLiteral("LoggerLocalPath"),
+                QStringLiteral(MODMAN_LOGGER_LOCAL_PATH),
+                true);
+    filesModule->addDefaultPathComponent(
+                QStringLiteral("CustomerDataLocalPath"),
+                QStringLiteral(MODMAN_CUSTOMERDATA_PATH),
+                true);
+    filesModule->addTtyWatcher("Ttys");
 
     //conditional systems
     bool customerDataSystemInitialized = false;
@@ -182,36 +203,11 @@ int main(int argc, char *argv[])
             if(!dataLoggerSystemInitialized)
             {
                 dataLoggerSystemInitialized = true;
-                qDebug() << "DataLoggerSystem is enabled";
+                qInfo("Starting DataLoggerSystem...");
                 evHandler->addSubsystem(dataLoggerSystem);
 
-                // the following code is not exactly depending on license system
-                // but here event system is up and running
-
-                // files entity
-                evHandler->addSubsystem(filesModule->getVeinEntity());
-                filesModule->initOnce();
-                filesModule->addMountToWatch(
-                            QStringLiteral("AutoMountedPaths"),
-                            QStringLiteral(MODMAN_AUTOMOUNT_PATH));
-                filesModule->addDirToWatch(
-                            QStringLiteral("AvailableCustomerData"),
-                            QStringLiteral(MODMAN_CUSTOMERDATA_PATH),
-                            QStringList({"*.json", "*/*.json"}),
-                            QDir::NoDotAndDotDot | QDir::Files,
-                            false);
-                filesModule->addDefaultPathComponent(
-                            QStringLiteral("LoggerLocalPath"),
-                            QStringLiteral(MODMAN_LOGGER_LOCAL_PATH),
-                            true);
-                filesModule->addDefaultPathComponent(
-                            QStringLiteral("CustomerDataLocalPath"),
-                            QStringLiteral(MODMAN_CUSTOMERDATA_PATH),
-                            true);
-
-                filesModule->addTtyWatcher("Ttys");
-
                 // exports entity
+                qInfo("Starting vf-export...");
                 evHandler->addSubsystem(exportModule->getVeinEntity());
                 exportModule->initOnce();
 
