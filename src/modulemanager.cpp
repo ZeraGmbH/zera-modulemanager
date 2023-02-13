@@ -2,7 +2,6 @@
 #include "modulemanagerconfig.h"
 #include "moduleeventhandler.h"
 #include "licensesystem.h"
-#include <proxy.h>
 
 #include <ve_eventsystem.h>
 #include <vsc_scriptsystem.h>
@@ -158,7 +157,7 @@ void ModuleManager::startModule(const QString & t_uniqueModuleName, const QStrin
         if(tmpFactory && m_licenseSystem->isSystemLicensed(t_uniqueModuleName))
         {
             qDebug() << "Creating module:" << t_uniqueModuleName << "with id:" << t_moduleId << "with config file:" << t_xmlConfigPath;
-            VirtualModule *tmpModule = tmpFactory->createModule(Zera::Proxy::cProxy::getInstance(), t_moduleId, m_storage, this);
+            VirtualModule *tmpModule = tmpFactory->createModule(t_moduleId, m_storage, this);
             if(tmpModule)
             {
                 connect(tmpModule, &VirtualModule::addEventSystem, this, &ModuleManager::onModuleEventSystemAdded);

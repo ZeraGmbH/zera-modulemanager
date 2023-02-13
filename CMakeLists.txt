@@ -105,7 +105,6 @@ target_link_libraries(zera-modulemanager-lib
     VeinMeta::VfExport
     VeinMeta::VfFiles
     VeinMeta::VfCryptoBridge
-    Zera::zera-proxy
     Zera::module-qt-plugin-interface
     zera-json-params
     )
