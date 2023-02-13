@@ -9,14 +9,6 @@
 #include <QElapsedTimer>
 
 
-namespace Zera
-{
-namespace Proxy
-{
-class cProxy;
-}
-}
-
 namespace VeinEvent
 {
 class StorageSystem;
@@ -150,7 +142,6 @@ private:
     QHash<QString, MeasurementModuleFactory*> m_factoryTable;
     QList<ModuleData *> m_moduleList;
     QQueue<ModuleData *> m_deferredStartList;
-    Zera::Proxy::cProxy * m_proxyInstance;
 
     VeinEvent::StorageSystem *m_storage=nullptr;
     ModuleEventHandler *m_eventHandler=nullptr;
