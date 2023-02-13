@@ -54,7 +54,6 @@ public:
 
 ModuleManager::ModuleManager(const QStringList &t_sessionList, QObject *t_parent) :
     QObject(t_parent),
-    m_proxyInstance(Zera::Proxy::cProxy::getInstance()),
     m_moduleStartLock(false)
 {
     m_timerAllModulesLoaded.start();
@@ -82,7 +81,6 @@ ModuleManager::~ModuleManager()
         delete toDelete;
     }
     m_moduleList.clear();
-    m_proxyInstance->deleteLater();
 }
 
 bool ModuleManager::loadModules()
@@ -160,7 +158,7 @@ void ModuleManager::startModule(const QString & t_uniqueModuleName, const QStrin
         if(tmpFactory && m_licenseSystem->isSystemLicensed(t_uniqueModuleName))
         {
             qDebug() << "Creating module:" << t_uniqueModuleName << "with id:" << t_moduleId << "with config file:" << t_xmlConfigPath;
-            VirtualModule *tmpModule = tmpFactory->createModule(m_proxyInstance, t_moduleId, m_storage, this);
+            VirtualModule *tmpModule = tmpFactory->createModule(Zera::Proxy::cProxy::getInstance(), t_moduleId, m_storage, this);
             if(tmpModule)
             {
                 connect(tmpModule, &VirtualModule::addEventSystem, this, &ModuleManager::onModuleEventSystemAdded);
