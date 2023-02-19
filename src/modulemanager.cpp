@@ -253,7 +253,7 @@ void ModuleManager::changeSessionFile(const QString &t_newSessionPath)
 
 void ModuleManager::setModulesPaused(bool t_paused)
 {
-    for(ModuleData *module : m_moduleList)
+    for(ModuleData *module : qAsConst(m_moduleList))
     {
         if(t_paused)
         {
