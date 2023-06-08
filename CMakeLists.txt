@@ -1,17 +1,13 @@
 cmake_minimum_required(VERSION 3.1)
 
-#set project name and language
 project(zera-modulemanager LANGUAGES CXX)
 
-#Automoc and RCC ON. Needed in QT projects
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-#Set project Version
 set(zeramodulemanager_VERSION_MAJOR "1")
 set(zeramodulemanager_VERSION_MINOR "2")
 set(zeramodulemanager_VERSION_PATCH "0")
-
 set(PROJECT_VERSION "${zeramodulemanager_VERSION_MAJOR}.${zeramodulemanager_VERSION_MINOR}.${zeramodulemanager_VERSION_PATCH}")
 
 include(FeatureSummary)
